@@ -1,0 +1,85 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="twic.ico">
+    <link rel="stylesheet" type="text/css" href="css/twic.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Podkova:400|Inconsolata:400,700">
+    <script type="text/javascript" src="lib/d3.min.js"></script>
+    <script type="text/javascript" src="lib/d3-tip.js"></script>
+    <script type="text/javascript" src="lib/queue.min.js"></script>
+    <script type="text/javascript" src="lib/textFlow.js"></script>
+    <script type="text/javascript" src="lib/svg_helper_functions.js"></script>
+    <script type="text/javascript" src="lib/class_syntax.js"></script>
+    <script type="text/javascript" src="lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="lib/jquery-ui.js"></script>
+    <script type="text/javascript" src="lib/packery.pkgd.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+
+    <script type="text/javascript" src="code/js/twic_control.js"></script>
+    <script type="text/javascript" src="code/js/twic_level.js"></script>
+    <script type="text/javascript" src="code/js/twic_panel.js"></script>
+    <script type="text/javascript" src="code/js/twic_datashape.js"></script>
+    <!-- <script type="text/javascript" src="lib/twic_lib.min.js"></script> -->
+</head>
+<body>
+<script type="text/javascript">
+    (function(){
+
+        var twicLevel = TWiC.Level.prototype.Instance();
+        twicLevel.LoadJSON(TWiC.Level.prototype.s_jsonDirectory + "tmn_corpus_info.json",
+                           TWiC.Level.prototype.s_jsonDirectory + "tmn_corpus_map.json");
+//        twicLevel.LoadJSON(TWiC.Level.prototype.s_jsonDirectory + "twic_corpusinfo.json",
+//            TWiC.Level.prototype.s_jsonDirectory + "twic_corpusmap.json");
+
+        // Once JSON has loaded, create and start the level
+        twicLevel.m_queue.await(function(){
+
+            // Create TWiC panels and link them together (panels add themselves to their given level)
+            var screenDims = TWiC.GetAvailableScreenSpace();
+            var topicBarDims = { width: screenDims.width, height: (2 * TWiC.TopicBar.prototype.s_minHeight) };
+
+            var corpusView = new TWiC.CorpusView({ x: 0, y: 0 }, // Panel position
+                { width: (screenDims.width >> 1) + (screenDims.width >> 2),
+                    height: screenDims.height - topicBarDims.height }, // Panel size
+                twicLevel, // Reference to Level instance
+                (screenDims.height - topicBarDims.height) / 3.0, // Bullseye radius
+                10); // Number of topics to display
+
+            var topicBar = new TWiC.TopicBar({ x: 0, y: screenDims.height - topicBarDims.height }, // Panel position
+                { width: topicBarDims.width, height: topicBarDims.height }, // Panel size
+                twicLevel); // Reference to Level instance
+
+            var dataBar = new TWiC.DataBar({ x: corpusView.m_size.width, y: 0 }, // Panel position
+                { width: screenDims.width >> 2, height: screenDims.height - topicBarDims.height }, // Panel size
+                twicLevel); // Reference to Level instance
+
+            // View links
+
+            // All views are linked to the topic bar
+            corpusView.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
+            corpusView.AddLinkedView(dataBar, TWiC.Interaction.mouseover);
+
+            // Topic bar
+            topicBar.AddLinkedView(corpusView, TWiC.Interaction.click);
+            topicBar.AddLinkedView(dataBar, TWiC.Interaction.click);
+
+            // Data bar
+            dataBar.AddLinkedView(corpusView, TWiC.Interaction.click);
+            dataBar.AddLinkedView(corpusView, TWiC.Interaction.mouseover);
+            dataBar.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
+
+            // Initialize the level
+            twicLevel.Initialize({ x: 0, y: 0 }, // Position
+                TWiC.GetAvailableScreenSpace(), // Size
+                d3.select("body")); // Parent tag
+
+            // Startup the level
+            twicLevel.Start();
+
+        }.bind(twicLevel));
+
+    })();
+</script>
+</body>
+</html>
+

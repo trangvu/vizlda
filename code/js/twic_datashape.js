@@ -93,10 +93,11 @@ var TWiC = (function(namespace){
         if ( this.m_isCorpusBullseye ){
 
             this.m_textCount = 0;
-            var corpusTopicCount = this.m_level.m_corpusInfo.corpus_info[1].length;
-            for ( var index = 0; index < corpusTopicCount; index++ ){
-                this.m_textCount += this.m_level.m_corpusMap["children"][index]["children"].length;
-            }
+            this.m_textCount = this.m_level.m_corpusMap['ndocs']
+            // var corpusTopicCount = this.m_level.m_corpusInfo.corpus_info[1].length;
+            // for ( var index = 0; index < corpusTopicCount; index++ ){
+            //     this.m_textCount += this.m_level.m_corpusMap["children"][index]["children"].length;
+            // }
         } else {
             this.m_textCount = this.m_level.m_corpusMap["children"][parseInt(p_title)]["children"].length;
         }
