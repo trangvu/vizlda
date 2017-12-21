@@ -234,19 +234,19 @@ var TWiC = (function(namespace){
                 resizeMinWidht = namespace.Panel.prototype.s_minimumPanelSize;
             }
         }*/
-
-        $(this.m_container.m_div[0]).resizable({alsoResize: "#" + $(this.m_container.m_div[0]).attr("id") + " .div_twic_control .twic_panel",
-                                                aspectRatio: p_maintainAspectRatio,
-                                                autoHide: true,
-                                                minWidth: resizeMinWidth,
-                                                minHeight: resizeMinHeight,
-                                                maxWidth: this.m_level.m_size.width,
-                                                maxHeight: this.m_level.m_size.height,
-                                                handles: "n, s, e, w, nw, ne, sw, se",
-                                                resize: function(){
-                                                    this.OnResize(false);
-                                                    this.m_level.m_resizeOccurred = true;
-                                                }.bind(this)});
+        //
+        // $(this.m_container.m_div[0]).resizable({alsoResize: "#" + $(this.m_container.m_div[0]).attr("id") + " .div_twic_control .twic_panel",
+        //                                         aspectRatio: p_maintainAspectRatio,
+        //                                         autoHide: true,
+        //                                         minWidth: resizeMinWidth,
+        //                                         minHeight: resizeMinHeight,
+        //                                         maxWidth: this.m_level.m_size.width,
+        //                                         maxHeight: this.m_level.m_size.height,
+        //                                         handles: "n, s, e, w, nw, ne, sw, se",
+        //                                         resize: function(){
+        //                                             this.OnResize(false);
+        //                                             this.m_level.m_resizeOccurred = true;
+        //                                         }.bind(this)});
     });
 
     namespace.Panel.method("Maximize", function(){
@@ -764,7 +764,7 @@ var TWiC = (function(namespace){
 
         // Make all objects of this panel resizable and draggable
         this.MakeResizable(false);
-        this.MakeDraggable();
+        // this.MakeDraggable();
     });
 
     namespace.CorpusView.method("Update", function(p_data, p_updateType){
@@ -1421,7 +1421,7 @@ var TWiC = (function(namespace){
 
         // Make all objects of this panel resizable and draggable
         this.MakeResizable(false);
-        this.MakeDraggable();
+        // this.MakeDraggable();
     });
 
     namespace.CorpusClusterView.method("Update", function(p_data, p_updateType){
@@ -2353,7 +2353,7 @@ var TWiC = (function(namespace){
 
             // Make all objects of this panel resizable and draggable
             this.MakeResizable(false);
-            this.MakeDraggable();
+            // this.MakeDraggable();
 
             // Update the panel for potential highlighting now that all SVG objects have been built
             if ( -1 != this.m_level.m_highlightedTopic ){
@@ -3009,7 +3009,7 @@ var TWiC = (function(namespace){
 
         // Make all objects of this panel resizable and draggable
         this.MakeResizable(false);
-        this.MakeDraggable();
+        // this.MakeDraggable();
     });
 
     namespace.TextView.method("Start", function(){
@@ -3044,8 +3044,8 @@ var TWiC = (function(namespace){
                 this.AddBarText(false);
 
                 // Make all objects of this panel resizable and draggable
-                this.MakeResizable();
-                this.MakeDraggable();
+                // this.MakeResizable();
+                // this.MakeDraggable();
 
                 // Update as if being moused over and then clicked
                 this.Update(p_data, namespace.Interaction.mouseover);
@@ -4249,7 +4249,7 @@ var TWiC = (function(namespace){
         this.Start();
 
         // Make the publication view draggable and resizable
-        this.MakeDraggable();
+        // this.MakeDraggable();
 
         // Text View will be open
         this.m_underlyingPanelOpen = true;
@@ -4282,7 +4282,7 @@ var TWiC = (function(namespace){
             var currentRadius = 0;
             for ( var index = 0; index < this.m_twicObjects.length; index++ ){
 
-                if ( index + 1 < this.m_twicObjects.length && parseInt(this.m_data.texts[index].page) - 1 > currentPage ){
+                if ( index + 1 < this.m_twicObjects.length && parseInt(this.m_data.texts[index].page)  > currentPage ){
 
                     pageInfo.push({start: currentPagesOffset, mid: currentHeight >> 1, r: currentRadius});
                     currentPagesOffset += currentHeight + pageSpacing;
@@ -4641,14 +4641,18 @@ var TWiC = (function(namespace){
             d3.json(TWiC.Level.prototype.s_jsonDirectory + this.m_filename, function(error, data){
 
                 this.m_data = data;
+                max = this.m_data.count < 20 ? this.m_data.count : 20;
 
-                for ( var index = 0; index < this.m_data.count; index++ ){
+                for ( var index = 0; index < max; index++ ){
+                    //Find top topic of current document
+                    props = this.m_level.m_corpusInfo.file_info[this.m_data.texts[index].file].prop
+                    var topTopic = {id: 0, value: props["0"][0]};
 
-                    var topTopic = {id: 0, value: this.m_level.m_corpusInfo.file_info[this.m_data.texts[index].file][2][0] };
-                    for ( var index2 = 0; index2 < this.m_level.m_corpusInfo.file_info[this.m_data.texts[index].file][2].length; index2++ ){
-                        if ( this.m_level.m_corpusInfo.file_info[this.m_data.texts[index].file][2][index2] > topTopic.value ){
+                    for ( var index2 = 0; index2 < Object.keys(props).length; index2++ ){
+                        if ( props[index2][0] == 1 ){
                             topTopic.id = index2;
-                            topTopic.value = this.m_level.m_corpusInfo.file_info[this.m_data.texts[index].file][2][index2];
+                            topTopic.value = props[index2][0];
+                            break;
                         }
                     }
                     var textRectangle = new TWiC.TopicRectangle({x:0,y:0}, {width:0,height:0},
@@ -4980,7 +4984,7 @@ var TWiC = (function(namespace){
 
         // Make all objects of this panel resizable and draggable
         this.MakeResizable(false);
-        this.MakeDraggable();
+        // this.MakeDraggable();
     });
 
     namespace.TopicBar.method("HighlightText", function(data){
@@ -5049,19 +5053,19 @@ var TWiC = (function(namespace){
         var resizeMinWidth = namespace.Panel.prototype.s_minimumPanelSize;
         var resizeMinHeight = namespace.TopicBar.prototype.s_minHeight;
 
-        $(this.m_container.m_div[0]).resizable({alsoResize: "#" + $(this.m_container.m_div[0]).attr("id") + " .twic_panel",
-                                                aspectRatio: p_maintainAspectRatio,
-                                                autoHide: true,
-                                                minWidth: resizeMinWidth,
-                                                minHeight: resizeMinHeight,
-                                                maxWidth: this.m_level.m_size.width,
-                                                maxHeight: this.m_level.m_size.height,
-                                                handles: "n, s, e, w, nw, ne, sw, se",
-                                                resize: function(){
-                                                    this.OnResize(false);
-                                                    this.m_level.m_resizeOccurred = true;
-                                                }.bind(this)});
-        $(this.m_container.m_div[0]).resizable("option","autoHide",true);
+        // $(this.m_container.m_div[0]).resizable({alsoResize: "#" + $(this.m_container.m_div[0]).attr("id") + " .twic_panel",
+        //                                         aspectRatio: p_maintainAspectRatio,
+        //                                         autoHide: true,
+        //                                         minWidth: resizeMinWidth,
+        //                                         minHeight: resizeMinHeight,
+        //                                         maxWidth: this.m_level.m_size.width,
+        //                                         maxHeight: this.m_level.m_size.height,
+        //                                         handles: "n, s, e, w, nw, ne, sw, se",
+        //                                         resize: function(){
+        //                                             this.OnResize(false);
+        //                                             this.m_level.m_resizeOccurred = true;
+        //                                         }.bind(this)});
+        // $(this.m_container.m_div[0]).resizable("option","autoHide",true);
     });
 
     namespace.TopicBar.method("Move", function(p_transition, p_callbackTiming, p_callback){
@@ -5253,7 +5257,7 @@ var TWiC = (function(namespace){
 
         // Make the publication view draggable and resizable
         this.MakeResizable(false);
-        this.MakeDraggable();
+        // this.MakeDraggable();
     });
 
     namespace.DataBar.method("Start", function(){

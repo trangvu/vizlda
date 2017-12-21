@@ -135,7 +135,7 @@ var TWiC = (function(namespace){
                                             //.attr("stroke-width", 4.5);
 
         // Add minimizing and maximizing buttons to the control bar for the panel
-        this.AddPanelSizeControls();
+        // this.AddPanelSizeControls();
     });
 
     namespace.Control.method("Update", function(p_data, p_updateType){

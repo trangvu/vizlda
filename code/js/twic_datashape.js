@@ -623,16 +623,17 @@ var TWiC = (function(namespace){
         this.m_allowDblclick = true;
         this.m_fileID = p_filenumber;
 
-        var topicColorIndex = 0;
-        for ( var index = 0; index < this.m_level.m_corpusMap["children"][this.m_clusterIndex]["children"].length; index++ ) {
+        // var topicColorIndex = 0;
+        // for ( var index = 0; index < this.m_level.m_corpusMap["children"][this.m_clusterIndex]["children"].length; index++ ) {
+        //
+        //     if ( this.m_name == this.m_level.m_corpusMap["children"][this.m_clusterIndex]["children"][index].name ) {
+        //         topicColorIndex = index;
+        //         break;
+        //     }
+        // }
 
-            if ( this.m_name == this.m_level.m_corpusMap["children"][this.m_clusterIndex]["children"][index].name ) {
-                topicColorIndex = index;
-                break;
-            }
-        }
-
-        var p_topics = this.m_level.m_corpusMap["children"][this.m_clusterIndex]["children"][topicColorIndex]["topics"];
+        //Top topics of this document
+        var p_topics = this.m_level.m_corpusInfo.file_info[p_filenumber].prop;
         this.m_fullTopicListRef = p_topics;
         this.m_topicProportionSum = 0;
         for ( index in p_topics ){
@@ -2563,7 +2564,7 @@ var TWiC = (function(namespace){
 
                         p_tile.m_panel.Update(null, namespace.Interaction.mouseover, true);
                         for ( var index = 0; index < p_tile.m_panel.m_linkedViews.length; index++ ){
-                            p_tile.m_panel.m_linkedViews[index].panel.Update(null, namespace.Interaction.mouseover);
+                            p_tile.m_panel.m_linkedViews[index].panel.Update(null, name1space.Interaction.mouseover);
                         }
 
                         break;
