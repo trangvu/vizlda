@@ -207,10 +207,7 @@ var TWiC = (function(namespace){
 
     // Basic constructor (property initialization occurs later)
     namespace.Level = function(){
-
-        // Queue for loading JSON
         this.m_queue = new queue();
-
         // Level attributes
         this.m_coordinates = { x: 0, y:0 };
         this.m_size = { width: 0, height: 0 };
@@ -378,41 +375,13 @@ var TWiC = (function(namespace){
     });
 
     // Loads all JSON required for TWiC
-    namespace.Level.method("LoadJSON", function(p_corpusInfoPath, p_corpusMapPath, p_corpusWordWeightsPath){
-
-        // Load the corpus information JSON
-        var corpusInfo = null;
-        var level = this;
-        this.m_queue.defer(function(callback) {
-            d3.json(p_corpusInfoPath, function(error, data) {
-                corpusInfo = data;
-                this.m_corpusInfo = corpusInfo;
-                this.m_topicWordLists = corpusInfo.topic_info[0];
-                this.m_topicColors = corpusInfo.topic_info[1];
-                this.PreblendTopicColors();
-                callback(null, corpusInfo);
-            }.bind(this));
-        }.bind(this));
-
-        // Load the corpus distance map JSON
-        var corpusDistanceMap = null;
-        this.m_queue.defer(function(callback) {
-            d3.json(p_corpusMapPath, function(error, data) {
-                corpusDistanceMap = data;
-                this.m_corpusMap = corpusDistanceMap;
-                callback(null, corpusDistanceMap);
-            }.bind(this));
-        }.bind(this));
-
-        // Load the corpus word weight file
-        var corpusWordWeights = null;
-        this.m_queue.defer(function(callback){
-            d3.json(p_corpusWordWeightsPath, function(error, data){
-                corpusWordWeights = data;
-                this.m_corpusWordWeights = corpusWordWeights;
-                callback(null, corpusWordWeights);
-            }.bind(this))
-        }.bind(this));
+    namespace.Level.method("SetJSONData", function(p_data){
+        // Corpus JSON data
+        this.m_corpusMap = p_data.m_corpusMap;
+        this.m_corpusInfo = p_data.m_corpusInfo;
+        this.m_topicWordLists = p_data.m_topicWordLists;
+        this.m_topicColors = p_data.m_topicColors;
+        this.PreblendTopicColors();
     });
 
     namespace.Level.method("Initialize", function(p_coordinates, p_size, p_parentDiv){
@@ -484,7 +453,7 @@ var TWiC = (function(namespace){
             for ( var index = 0; index < this.m_graphViews.length; index++ ){
                 this.m_graphViews[index].Start();
             }
-            for ( var index = 0; index < this.m_infoViews.length; index++ ){
+            for ( var index = 0; index < this.m_infoViews.length; index++ ) {
                 this.m_infoViews[index].Start();
             }
         }.bind(this));

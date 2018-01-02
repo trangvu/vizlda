@@ -3,7 +3,8 @@
     <meta charset="utf-8">
     <link rel="shortcut icon" type="image/x-icon" href="twic.ico">
     <link rel="stylesheet" type="text/css" href="css/twic.css">
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Podkova:400|Inconsolata:400,700">
+    <link rel="stylesheet" type="text/css"
+          href="http://fonts.googleapis.com/css?family=Podkova:400|Inconsolata:400,700">
     <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
     <script type="text/javascript" src="lib/d3.min.js"></script>
     <script type="text/javascript" src="lib/d3-tip.js"></script>
@@ -18,6 +19,7 @@
     <script type="text/javascript" src="lib/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="code/js/twic_control.js"></script>
+    <script type="text/javascript" src="code/js/twic_data.js"></script>
     <script type="text/javascript" src="code/js/twic_level.js"></script>
     <script type="text/javascript" src="code/js/twic_panel.js"></script>
     <script type="text/javascript" src="code/js/twic_datashape.js"></script>
@@ -34,63 +36,128 @@
 <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
         <script type="text/javascript">
-            (function(){
-                var twicData;
-
+            twicData = TWiC.m_data;
+            twicData.LoadJSON(TWiC.Data.prototype.s_jsonDirectory + "tmn_meta_corpus_info.json",
+                TWiC.Data.prototype.s_jsonDirectory + "tmn_meta_corpus_map.json");
+            // Once JSON has loaded, create and start the level
+            twicData.m_queue.await(function () {
                 var twicLevel = TWiC.Level.prototype.Instance();
-                twicLevel.LoadJSON(TWiC.Level.prototype.s_jsonDirectory + "tmn_meta_corpus_info.json",
-                    TWiC.Level.prototype.s_jsonDirectory + "tmn_meta_corpus_map.json");
-//        twicLevel.LoadJSON(TWiC.Level.prototype.s_jsonDirectory + "twic_corpusinfo.json",
-//            TWiC.Level.prototype.s_jsonDirectory + "twic_corpusmap.json");
+                twicLevel.SetJSONData(TWiC.m_data);
 
-                // Once JSON has loaded, create and start the level
-                twicLevel.m_queue.await(function(){
+                // Create TWiC panels and link them together (panels add themselves to their given level)
+                var screenDims = TWiC.GetAvailableScreenSpace();
+                var topicBarDims = {width: screenDims.width, height: (2 * TWiC.TopicBar.prototype.s_minHeight)};
 
-                    // Create TWiC panels and link them together (panels add themselves to their given level)
-                    var screenDims = TWiC.GetAvailableScreenSpace();
-                    var topicBarDims = { width: screenDims.width, height: (2 * TWiC.TopicBar.prototype.s_minHeight) };
+                var corpusView = new TWiC.CorpusView({x: 0, y: 0}, // Panel position
+                    {
+                        width: (screenDims.width >> 1) + (screenDims.width >> 2),
+                        height: screenDims.height - topicBarDims.height
+                    }, // Panel size
+                    twicLevel, // Reference to Level instance
+                    (screenDims.height - topicBarDims.height) / 3.0, // Bullseye radius
+                    10); // Number of topics to display
 
-                    var corpusView = new TWiC.CorpusView({ x: 0, y: 0 }, // Panel position
-                        { width: (screenDims.width >> 1) + (screenDims.width >> 2),
-                            height: screenDims.height - topicBarDims.height }, // Panel size
-                        twicLevel, // Reference to Level instance
-                        (screenDims.height - topicBarDims.height) / 3.0, // Bullseye radius
-                        10); // Number of topics to display
+                var topicBar = new TWiC.TopicBar({x: 0, y: screenDims.height - topicBarDims.height}, // Panel position
+                    {width: topicBarDims.width, height: topicBarDims.height}, // Panel size
+                    twicLevel); // Reference to Level instance
 
-                    var topicBar = new TWiC.TopicBar({ x: 0, y: screenDims.height - topicBarDims.height }, // Panel position
-                        { width: topicBarDims.width, height: topicBarDims.height }, // Panel size
-                        twicLevel); // Reference to Level instance
+                var dataBar = new TWiC.DataBar({x: corpusView.m_size.width, y: 0}, // Panel position
+                    {width: screenDims.width >> 2, height: screenDims.height - topicBarDims.height}, // Panel size
+                    twicLevel); // Reference to Level instance
 
-                    var dataBar = new TWiC.DataBar({ x: corpusView.m_size.width, y: 0 }, // Panel position
-                        { width: screenDims.width >> 2, height: screenDims.height - topicBarDims.height }, // Panel size
-                        twicLevel); // Reference to Level instance
+                // View links
 
-                    // View links
+                // All views are linked to the topic bar
+                corpusView.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
+                corpusView.AddLinkedView(dataBar, TWiC.Interaction.mouseover);
 
-                    // All views are linked to the topic bar
-                    corpusView.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
-                    corpusView.AddLinkedView(dataBar, TWiC.Interaction.mouseover);
+                // Topic bar
+                topicBar.AddLinkedView(corpusView, TWiC.Interaction.click);
+                topicBar.AddLinkedView(dataBar, TWiC.Interaction.click);
 
-                    // Topic bar
-                    topicBar.AddLinkedView(corpusView, TWiC.Interaction.click);
-                    topicBar.AddLinkedView(dataBar, TWiC.Interaction.click);
+                // Data bar
+                dataBar.AddLinkedView(corpusView, TWiC.Interaction.click);
+                dataBar.AddLinkedView(corpusView, TWiC.Interaction.mouseover);
+                dataBar.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
 
-                    // Data bar
-                    dataBar.AddLinkedView(corpusView, TWiC.Interaction.click);
-                    dataBar.AddLinkedView(corpusView, TWiC.Interaction.mouseover);
-                    dataBar.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
+                // Initialize the level
+                twicLevel.Initialize({x: 50, y: 50}, // Position
+                    TWiC.GetAvailableScreenSpace(), // Size
+                    d3.select("#home")); // Parent tag
 
-                    // Initialize the level
-                    twicLevel.Initialize({ x: 50, y: 50 }, // Position
-                        TWiC.GetAvailableScreenSpace(), // Size
-                        d3.select("#home")); // Parent tag
+                // Startup the level
+                twicLevel.Start();
 
-                    // Startup the level
-                    twicLevel.Start();
+                //DOC level
 
-                }.bind(twicLevel));
+                var docLevel = TWiC.Level.prototype.Instance();
+                docLevel.SetJSONData(TWiC.m_data);
 
-            })();
+                // Dimensions
+                var screenDims = TWiC.GetAvailableScreenSpace();
+                var topicBarHeight = 2 * TWiC.TopicBar.prototype.s_minHeight;
+
+                // Panels
+                var publicationView = new TWiC.PublicationView({x: 0, y: 0}, // Panel position
+                    {width: screenDims.width >> 1, height: screenDims.height - topicBarHeight}, // Panel size
+                    docLevel, // Level reference,
+                    "publication view",
+                    "tmn_doc_info.json");
+                var textView = new TWiC.TextView({x: screenDims.width >> 1, y: 0}, // Panel position
+                    {width: screenDims.width >> 2, height: screenDims.height - topicBarHeight}, // Panel size
+                    docLevel); // Level reference
+                var topicBar = new TWiC.TopicBar({x: 0, y: screenDims.height - topicBarHeight}, // Panel position
+                    {width: screenDims.width, height: topicBarHeight}, // Panel size
+                    docLevel); // Level reference
+
+                var dataBar = new TWiC.DataBar({x: (screenDims.width >> 1) + (screenDims.width >> 2), y: 0}, // Panel position
+                    {width: screenDims.width >> 2, height: screenDims.height - topicBarHeight}, // Panel size
+                    docLevel); // Level reference
+
+                // Mouse behaviors
+
+                // Publication view
+                publicationView.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
+                publicationView.AddLinkedView(dataBar, TWiC.Interaction.mouseover);
+                publicationView.AddLinkedView(textView, TWiC.Interaction.mouseover);
+                publicationView.AddLinkedView(topicBar, TWiC.Interaction.click);
+                publicationView.AddLinkedView(dataBar, TWiC.Interaction.click);
+                publicationView.AddLinkedView(textView, TWiC.Interaction.click);
+                publicationView.AddLinkedView(textView, TWiC.Interaction.dblclick);
+
+                // Text view
+                textView.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
+                textView.AddLinkedView(dataBar, TWiC.Interaction.mouseover);
+                textView.AddLinkedView(publicationView, TWiC.Interaction.mouseover);
+                textView.AddLinkedView(topicBar, TWiC.Interaction.click);
+                textView.AddLinkedView(dataBar, TWiC.Interaction.click);
+                textView.AddLinkedView(publicationView, TWiC.Interaction.click);
+
+                // Topic bar
+                topicBar.AddLinkedView(publicationView, TWiC.Interaction.mouseover);
+                topicBar.AddLinkedView(textView, TWiC.Interaction.mouseover);
+                topicBar.AddLinkedView(dataBar, TWiC.Interaction.mouseover);
+                topicBar.AddLinkedView(publicationView, TWiC.Interaction.click);
+                topicBar.AddLinkedView(textView, TWiC.Interaction.click);
+
+                // Data bar
+                dataBar.AddLinkedView(publicationView, TWiC.Interaction.mouseover);
+                dataBar.AddLinkedView(textView, TWiC.Interaction.mouseover);
+                dataBar.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
+                dataBar.AddLinkedView(publicationView, TWiC.Interaction.click);
+                dataBar.AddLinkedView(textView, TWiC.Interaction.click);
+                dataBar.AddLinkedView(topicBar, TWiC.Interaction.click);
+
+                // Initialize the level
+                docLevel.Initialize({x: 0, y: 0}, // Position
+                    TWiC.GetAvailableScreenSpace(),
+                    d3.select("#docs")); // Size
+
+                // Startup the level
+                docLevel.Start();
+                //End DOC level
+
+            });
         </script>
     </div>
     <div id="topics" class="tab-pane fade">
@@ -98,83 +165,7 @@
         <p>View of a specific topic</p>
     </div>
     <div id="docs" class="tab-pane fade">
-        <script type="text/javascript">
-            (function(){
 
-                var twicLevel = TWiC.Level.prototype.Instance();
-                twicLevel.LoadJSON(TWiC.Level.prototype.s_jsonDirectory + "tmn_meta_corpus_info.json",
-                    TWiC.Level.prototype.s_jsonDirectory + "tmn_meta_corpus_map.json");
-
-                // Once JSON has loaded, create and start the level
-                twicLevel.m_queue.await(function(){
-
-                    // Dimensions
-                    var screenDims = TWiC.GetAvailableScreenSpace();
-                    var topicBarHeight = 2 * TWiC.TopicBar.prototype.s_minHeight;
-
-                    // Panels
-                    var publicationView = new TWiC.PublicationView({x: 0, y: 0}, // Panel position
-                        {width: screenDims.width >> 1, height: screenDims.height - topicBarHeight}, // Panel size
-                        twicLevel, // Level reference,
-                        "publication view",
-                        "tmn_doc_info.json");
-                    var textView = new TWiC.TextView({x: screenDims.width >> 1, y: 0}, // Panel position
-                        {width: screenDims.width >> 2, height: screenDims.height - topicBarHeight}, // Panel size
-                        twicLevel); // Level reference
-                    var topicBar = new TWiC.TopicBar({x: 0, y: screenDims.height - topicBarHeight}, // Panel position
-                        {width: screenDims.width, height: topicBarHeight}, // Panel size
-                        twicLevel); // Level reference
-
-                    var dataBar = new TWiC.DataBar({x: (screenDims.width >> 1) + (screenDims.width >> 2), y: 0}, // Panel position
-                        {width: screenDims.width >> 2, height: screenDims.height - topicBarHeight}, // Panel size
-                        twicLevel); // Level reference
-
-                    // Mouse behaviors
-
-                    // Publication view
-                    publicationView.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
-                    publicationView.AddLinkedView(dataBar, TWiC.Interaction.mouseover);
-                    publicationView.AddLinkedView(textView, TWiC.Interaction.mouseover);
-                    publicationView.AddLinkedView(topicBar, TWiC.Interaction.click);
-                    publicationView.AddLinkedView(dataBar, TWiC.Interaction.click);
-                    publicationView.AddLinkedView(textView, TWiC.Interaction.click);
-                    publicationView.AddLinkedView(textView, TWiC.Interaction.dblclick);
-
-                    // Text view
-                    textView.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
-                    textView.AddLinkedView(dataBar, TWiC.Interaction.mouseover);
-                    textView.AddLinkedView(publicationView, TWiC.Interaction.mouseover);
-                    textView.AddLinkedView(topicBar, TWiC.Interaction.click);
-                    textView.AddLinkedView(dataBar, TWiC.Interaction.click);
-                    textView.AddLinkedView(publicationView, TWiC.Interaction.click);
-
-                    // Topic bar
-                    topicBar.AddLinkedView(publicationView, TWiC.Interaction.mouseover);
-                    topicBar.AddLinkedView(textView, TWiC.Interaction.mouseover);
-                    topicBar.AddLinkedView(dataBar, TWiC.Interaction.mouseover);
-                    topicBar.AddLinkedView(publicationView, TWiC.Interaction.click);
-                    topicBar.AddLinkedView(textView, TWiC.Interaction.click);
-
-                    // Data bar
-                    dataBar.AddLinkedView(publicationView, TWiC.Interaction.mouseover);
-                    dataBar.AddLinkedView(textView, TWiC.Interaction.mouseover);
-                    dataBar.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
-                    dataBar.AddLinkedView(publicationView, TWiC.Interaction.click);
-                    dataBar.AddLinkedView(textView, TWiC.Interaction.click);
-                    dataBar.AddLinkedView(topicBar, TWiC.Interaction.click);
-
-                    // Initialize the level
-                    twicLevel.Initialize({x: 0, y: 0}, // Position
-                        TWiC.GetAvailableScreenSpace(),
-                        d3.select("#docs")); // Size
-
-                    // Startup the level
-                    twicLevel.Start();
-
-                }.bind(twicLevel));
-
-            })();
-        </script>
     </div>
     <div id="words" class="tab-pane fade">
         <h3>Word view</h3>
@@ -182,10 +173,8 @@
     </div>
 </div>
 <script type="text/javascript">
-    jQuery(document).ready(function($) {
-        $("ul#navtab > li").on( "click", "a", function() {
-            event.preventDefault();//stop browser to take action for clicked anchor
-
+    jQuery(document).ready(function ($) {
+        $("ul#navtab > li").on("click", "a", function () {
             //get displaying tab content jQuery selector
             var active_tab_selector = $('.nav-tabs > li.active > a').attr('href');
 
