@@ -28,9 +28,10 @@ var TWiC = (function(namespace){
     };
 
     namespace.GetAvailableScreenSpace = function(){
-
         //return { width: screen.availWidth, height: screen.availHeight };
-        return { width: window.innerWidth, height: window.innerHeight };
+        navbar = document.getElementById('navtab').getBoundingClientRect();
+        console.log(navbar.height)
+        return { width: window.innerWidth - 20, height: window.innerHeight - navbar.height - 50};
     };
 
     namespace.GetUniqueID = function(){
@@ -106,9 +107,10 @@ var TWiC = (function(namespace){
         }
 
         // Add the container's div
+        this.m_parentDiv_id = p_parentDiv.attr("id");
         this.m_div = p_parentDiv.append("div")
                                 //.attr("class", "div_twic_container ui-widget-content item")
-                                .attr("class", "div_twic_container item")
+                                .attr("class", "div_twic_container item " + "div_twic_container_" + this.m_parentDiv_id)
                                 .attr("id", "div_twic_container_" + this.m_name)
                                 .style("position", "absolute")
                                 .style("left", this.m_coordinates.x)
@@ -185,20 +187,20 @@ var TWiC = (function(namespace){
                 case "top":
                 case "bottom":
                     this.m_panel.SetSize({width: p_size.width, height: p_size.height - this.m_controlBar.m_size.height});
-                    this.m_size.width = this.m_panel.m_size.width;
+                    this.m_size.width = this.m_panel.m_size.width - 20;
                     this.m_size.height = this.m_panel.m_size.height + this.m_controlBar.m_size.height;
                     break;
                 case "left":
                 case "right":
                     this.m_panel.SetSize({width: p_size.width - this.m_controlBar.m_size.width, height: p_size.height});
-                    this.m_size.width = this.m_panel.m_size.width + this.m_controlBar.m_size.width;
+                    this.m_size.width = this.m_panel.m_size.width + this.m_controlBar.m_size.width - 20;
                     this.m_size.height = this.m_panel.m_size.height;
                     break;
             }
         } else {
             // Otherwise, panel and its container are the same size
-            this.m_size = { width: p_size.width, height: p_size.height };
-            this.m_panel.SetSize({ width: p_size.width, height: p_size.height });
+            this.m_size = { width: p_size.width - 20, height: p_size.height };
+            this.m_panel.SetSize({ width: p_size.width -20, height: p_size.height });
         }
     });
 
