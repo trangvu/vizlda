@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="css/twic.css">
     <link rel="stylesheet" type="text/css"
           href="http://fonts.googleapis.com/css?family=Podkova:400|Inconsolata:400,700">
-    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css" media="screen">-->
     <script type="text/javascript" src="lib/d3.min.js"></script>
     <script type="text/javascript" src="lib/d3-tip.js"></script>
     <script type="text/javascript" src="lib/queue.min.js"></script>
@@ -15,8 +15,11 @@
     <script type="text/javascript" src="lib/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="lib/jquery-ui.js"></script>
     <script type="text/javascript" src="lib/packery.pkgd.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-    <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+    <!--<script type="text/javascript" src="lib/bootstrap.min.js"></script>-->
 
     <script type="text/javascript" src="code/js/twic_control.js"></script>
     <script type="text/javascript" src="code/js/twic_data.js"></script>
@@ -26,12 +29,59 @@
     <!-- <script type="text/javascript" src="lib/twic_lib.min.js"></script> -->
 </head>
 <body>
-<ul class="nav nav-tabs" id="navtab">
-    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-    <li><a data-toggle="tab" href="#topics">Topic</a></li>
-    <li><a data-toggle="tab" href="#docs">Document</a></li>
-    <li><a data-toggle="tab" href="#words">Word</a></li>
-</ul>
+
+<nav class="navbar navbar-inverse" style="margin-bottom:0;">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">TMN Corpus</a>
+        </div>
+        <div class="col-md-4">
+            <ul class="nav nav-tabs" id="navtab">
+                <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                <li><a data-toggle="tab" href="#topics">Topic</a></li>
+                <li><a data-toggle="tab" href="#docs">Document</a></li>
+                <li><a data-toggle="tab" href="#words">Word</a></li>
+            </ul>
+        </div>
+        <div class="input-group col-md-4 pull-right" id="adv-search" style="padding-top:8;">
+            <input type="text" class="form-control" placeholder="Search">
+            <div class="input-group-btn">
+                <div class="btn-group" role="group" style="display: flex !important;">
+                    <div class="dropdown dropdown-lg" style="position: static !important;">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="border-radius: 0;width: 33;height: 34;margin-left: -1px;">
+                            <span class="caret"></span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right col-md-4" role="menu" style="min-width: 420px;margin-top: -1px;padding: 6px 20px;">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group" style="margin-left:0;margin-right:0;">
+                                    <label for="filter">Categories</label>
+                                    <select class="form-control">
+                                        <option value="0" selected="">All categories</option>
+                                        <option value="1">Featured</option>
+                                        <option value="2">Most popular</option>
+                                        <option value="3">Top rated</option>
+                                        <option value="4">Most commented</option>
+                                    </select>
+                                </div>
+                                <!--<div class="form-group" style="margin-left:0;margin-right:0;">-->
+                                    <!--<label for="contain">Author</label>-->
+                                    <!--<input class="form-control" type="text">-->
+                                <!--</div>-->
+                                <div class="form-group" style="margin-left:0;margin-right:0;">
+                                    <label for="contain">Contains the words</label>
+                                    <input class="form-control" type="text">
+                                </div>
+                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            </form>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
 
 <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
@@ -161,15 +211,15 @@
         </script>
     </div>
     <div id="topics" class="tab-pane fade">
-        <h3>Topic view</h3>
-        <p>View of a specific topic</p>
+        <!--<h3>Topic view</h3>-->
+        <!--<p>View of a specific topic</p>-->
     </div>
     <div id="docs" class="tab-pane fade">
 
     </div>
     <div id="words" class="tab-pane fade">
-        <h3>Word view</h3>
-        <p>Some content in menu 2.</p>
+        <!--<h3>Word view</h3>-->
+        <!--<p>Some content in menu 2.</p>-->
     </div>
 </div>
 <script type="text/javascript">
@@ -195,12 +245,6 @@
             $(target_tab_selector).addClass('in active');
             var c = $(".div_twic_level");
             c.packery();
-
-            // disable transition
-//            c.packery( 'option', { transitionDuration: 0 });
-
-            // re-enable transition
-//            c.packery( 'option', { transitionDuration: '0.4s' });
         });
     });
 </script>
