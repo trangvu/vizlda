@@ -1,0 +1,254 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="twic.ico">
+    <link rel="stylesheet" type="text/css" href="css/twic.css">
+    <link rel="stylesheet" type="text/css"
+          href="http://fonts.googleapis.com/css?family=Podkova:400|Inconsolata:400,700">
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css" media="screen">-->
+    <script type="text/javascript" src="lib/d3.min.js"></script>
+    <script type="text/javascript" src="lib/d3-tip.js"></script>
+    <script type="text/javascript" src="lib/queue.min.js"></script>
+    <script type="text/javascript" src="lib/textFlow.js"></script>
+    <script type="text/javascript" src="lib/svg_helper_functions.js"></script>
+    <script type="text/javascript" src="lib/class_syntax.js"></script>
+    <script type="text/javascript" src="lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="lib/jquery-ui.js"></script>
+    <script type="text/javascript" src="lib/packery.pkgd.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+    <!--<script type="text/javascript" src="lib/bootstrap.min.js"></script>-->
+
+    <script type="text/javascript" src="code/js/twic_control.js"></script>
+    <script type="text/javascript" src="code/js/twic_data.js"></script>
+    <script type="text/javascript" src="code/js/twic_level.js"></script>
+    <script type="text/javascript" src="code/js/twic_panel.js"></script>
+    <script type="text/javascript" src="code/js/twic_datashape.js"></script>
+    <!-- <script type="text/javascript" src="lib/twic_lib.min.js"></script> -->
+</head>
+<body>
+
+<nav class="navbar navbar-inverse" style="margin-bottom:0;">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Obesity Corpus</a>
+        </div>
+        <div class="col-md-4">
+            <ul class="nav nav-tabs" id="navtab">
+                <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                <li><a data-toggle="tab" href="#topics">Topic</a></li>
+                <li><a data-toggle="tab" href="#docs">Document</a></li>
+                <li><a data-toggle="tab" href="#words">Word</a></li>
+            </ul>
+        </div>
+        <div class="input-group col-md-4 pull-right" id="adv-search" style="padding-top:8;">
+            <input type="text" class="form-control" placeholder="Search">
+            <div class="input-group-btn">
+                <div class="btn-group" role="group" style="display: flex !important;">
+                    <div class="dropdown dropdown-lg" style="position: static !important;">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="border-radius: 0;width: 33;height: 34;margin-left: -1px;">
+                            <span class="caret"></span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right col-md-4" role="menu" style="min-width: 420px;margin-top: -1px;padding: 6px 20px;">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group" style="margin-left:0;margin-right:0;">
+                                    <label for="filter">Categories</label>
+                                    <select class="form-control">
+                                        <option value="0" selected="">All categories</option>
+                                        <option value="1">Featured</option>
+                                        <option value="2">Most popular</option>
+                                        <option value="3">Top rated</option>
+                                        <option value="4">Most commented</option>
+                                    </select>
+                                </div>
+                                <!--<div class="form-group" style="margin-left:0;margin-right:0;">-->
+                                    <!--<label for="contain">Author</label>-->
+                                    <!--<input class="form-control" type="text">-->
+                                <!--</div>-->
+                                <div class="form-group" style="margin-left:0;margin-right:0;">
+                                    <label for="contain">Contains the words</label>
+                                    <input class="form-control" type="text">
+                                </div>
+                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            </form>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+        <script type="text/javascript">
+            twicData = TWiC.m_data;
+            twicData.LoadJSON(TWiC.Data.prototype.s_jsonDirectory + "obesity_corpus_info.json",
+                TWiC.Data.prototype.s_jsonDirectory + "obesity_corpus_map.json");
+            // Once JSON has loaded, create and start the level
+            twicData.m_queue.await(function () {
+                var twicLevel = TWiC.Level.prototype.Instance();
+                twicLevel.SetJSONData(TWiC.m_data);
+
+                // Create TWiC panels and link them together (panels add themselves to their given level)
+                var screenDims = TWiC.GetAvailableScreenSpace();
+                var topicBarDims = {width: screenDims.width, height: (2 * TWiC.TopicBar.prototype.s_minHeight)};
+
+                var corpusView = new TWiC.CorpusView({x: 0, y: 0}, // Panel position
+                    {
+                        width: (screenDims.width >> 1) + (screenDims.width >> 2),
+                        height: screenDims.height - topicBarDims.height
+                    }, // Panel size
+                    twicLevel, // Reference to Level instance
+                    (screenDims.height - topicBarDims.height) / 3.0, // Bullseye radius
+                    10); // Number of topics to display
+
+                var topicBar = new TWiC.TopicBar({x: 0, y: screenDims.height - topicBarDims.height}, // Panel position
+                    {width: topicBarDims.width, height: topicBarDims.height}, // Panel size
+                    twicLevel); // Reference to Level instance
+
+                var dataBar = new TWiC.DataBar({x: corpusView.m_size.width, y: 0}, // Panel position
+                    {width: screenDims.width >> 2, height: screenDims.height - topicBarDims.height}, // Panel size
+                    twicLevel); // Reference to Level instance
+
+                // View links
+
+                // All views are linked to the topic bar
+                corpusView.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
+                corpusView.AddLinkedView(dataBar, TWiC.Interaction.mouseover);
+
+                // Topic bar
+                topicBar.AddLinkedView(corpusView, TWiC.Interaction.click);
+                topicBar.AddLinkedView(dataBar, TWiC.Interaction.click);
+
+                // Data bar
+                dataBar.AddLinkedView(corpusView, TWiC.Interaction.click);
+                dataBar.AddLinkedView(corpusView, TWiC.Interaction.mouseover);
+                dataBar.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
+
+                // Initialize the level
+                twicLevel.Initialize({x: 50, y: 50}, // Position
+                    TWiC.GetAvailableScreenSpace(), // Size
+                    d3.select("#home")); // Parent tag
+
+                // Startup the level
+                twicLevel.Start();
+
+                //DOC level
+
+                var docLevel = TWiC.Level.prototype.Instance();
+                docLevel.SetJSONData(TWiC.m_data);
+
+                // Dimensions
+                var screenDims = TWiC.GetAvailableScreenSpace();
+                var topicBarHeight = 2 * TWiC.TopicBar.prototype.s_minHeight;
+
+                // Panels
+                var publicationView = new TWiC.PublicationView({x: 0, y: 0}, // Panel position
+                    {width: screenDims.width >> 1, height: screenDims.height - topicBarHeight}, // Panel size
+                    docLevel, // Level reference,
+                    "publication view",
+                    "tmn_doc_info.json");
+                var textView = new TWiC.TextView({x: screenDims.width >> 1, y: 0}, // Panel position
+                    {width: screenDims.width >> 2, height: screenDims.height - topicBarHeight}, // Panel size
+                    docLevel); // Level reference
+                var topicBar = new TWiC.TopicBar({x: 0, y: screenDims.height - topicBarHeight}, // Panel position
+                    {width: screenDims.width, height: topicBarHeight}, // Panel size
+                    docLevel); // Level reference
+
+                var dataBar = new TWiC.DataBar({x: (screenDims.width >> 1) + (screenDims.width >> 2), y: 0}, // Panel position
+                    {width: screenDims.width >> 2, height: screenDims.height - topicBarHeight}, // Panel size
+                    docLevel); // Level reference
+
+                // Mouse behaviors
+
+                // Publication view
+                publicationView.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
+                publicationView.AddLinkedView(dataBar, TWiC.Interaction.mouseover);
+                publicationView.AddLinkedView(textView, TWiC.Interaction.mouseover);
+                publicationView.AddLinkedView(topicBar, TWiC.Interaction.click);
+                publicationView.AddLinkedView(dataBar, TWiC.Interaction.click);
+                publicationView.AddLinkedView(textView, TWiC.Interaction.click);
+                publicationView.AddLinkedView(textView, TWiC.Interaction.dblclick);
+
+                // Text view
+                textView.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
+                textView.AddLinkedView(dataBar, TWiC.Interaction.mouseover);
+                textView.AddLinkedView(publicationView, TWiC.Interaction.mouseover);
+                textView.AddLinkedView(topicBar, TWiC.Interaction.click);
+                textView.AddLinkedView(dataBar, TWiC.Interaction.click);
+                textView.AddLinkedView(publicationView, TWiC.Interaction.click);
+
+                // Topic bar
+                topicBar.AddLinkedView(publicationView, TWiC.Interaction.mouseover);
+                topicBar.AddLinkedView(textView, TWiC.Interaction.mouseover);
+                topicBar.AddLinkedView(dataBar, TWiC.Interaction.mouseover);
+                topicBar.AddLinkedView(publicationView, TWiC.Interaction.click);
+                topicBar.AddLinkedView(textView, TWiC.Interaction.click);
+
+                // Data bar
+                dataBar.AddLinkedView(publicationView, TWiC.Interaction.mouseover);
+                dataBar.AddLinkedView(textView, TWiC.Interaction.mouseover);
+                dataBar.AddLinkedView(topicBar, TWiC.Interaction.mouseover);
+                dataBar.AddLinkedView(publicationView, TWiC.Interaction.click);
+                dataBar.AddLinkedView(textView, TWiC.Interaction.click);
+                dataBar.AddLinkedView(topicBar, TWiC.Interaction.click);
+
+                // Initialize the level
+                docLevel.Initialize({x: 0, y: 0}, // Position
+                    TWiC.GetAvailableScreenSpace(),
+                    d3.select("#docs")); // Size
+
+                // Startup the level
+                docLevel.Start();
+                //End DOC level
+
+            });
+        </script>
+    </div>
+    <div id="topics" class="tab-pane fade">
+        <!--<h3>Topic view</h3>-->
+        <!--<p>View of a specific topic</p>-->
+    </div>
+    <div id="docs" class="tab-pane fade">
+
+    </div>
+    <div id="words" class="tab-pane fade">
+        <!--<h3>Word view</h3>-->
+        <!--<p>Some content in menu 2.</p>-->
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $("ul#navtab > li").on("click", "a", function () {
+            //get displaying tab content jQuery selector
+            var active_tab_selector = $('.nav-tabs > li.active > a').attr('href');
+
+            //find actived navigation and remove 'active' css
+            var actived_nav = $('.nav-tabs > li.active');
+            actived_nav.removeClass('in active');
+
+            //add 'active' css into clicked navigation
+            $(this).parents('li').addClass('in active');
+
+            //hide displaying tab content
+            $(active_tab_selector).removeClass('in active');
+            $(active_tab_selector).addClass('hide');
+
+            //show target tab content
+            var target_tab_selector = $(this).attr('href');
+            $(target_tab_selector).removeClass('hide');
+            $(target_tab_selector).addClass('in active');
+            var c = $(".div_twic_level");
+            c.packery();
+        });
+    });
+</script>
+
+</body>
+</html>
+
