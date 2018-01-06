@@ -606,11 +606,10 @@ var TWiC = (function(namespace){
 
 
     // TWiC TopicRectangle (inherits from DataShape)
-    namespace.TopicRectangle = function(p_coordinates, p_size, p_filenumber, p_level, p_panel, p_linkedViews, p_clusterIndex, p_numberTopics){
+    namespace.TopicRectangle = function(p_coordinates, p_size, p_docIndex, p_level, p_panel, p_linkedViews, p_clusterIndex, p_numberTopics){
 
         namespace.DataShape.apply(this, arguments);
 
-        this.m_data = null;
         this.m_tipLines = [];
         this.m_showingTip = false;
         this.m_tip = null;
@@ -621,45 +620,36 @@ var TWiC = (function(namespace){
         this.m_clusterRectShapeGroup = null;
         this.m_shapeChar = namespace.TopicRectangle.prototype.s_shapeChar;
         this.m_allowDblclick = true;
-        this.m_fileID = p_filenumber;
-
-        // var topicColorIndex = 0;
-        // for ( var index = 0; index < this.m_level.m_corpusMap["children"][this.m_clusterIndex]["children"].length; index++ ) {
-        //
-        //     if ( this.m_name == this.m_level.m_corpusMap["children"][this.m_clusterIndex]["children"][index].name ) {
-        //         topicColorIndex = index;
-        //         break;
-        //     }
-        // }
+        this.m_docIndex = p_docIndex;
+        this.m_data = this.m_level.m_docInfo.docs[this.m_docIndex].text
 
         //Top topics of this document
-        var p_topics = this.m_level.m_corpusInfo.file_info[p_filenumber].prop;
+        var p_topics = this.m_level.m_docInfo.docs[this.m_docIndex].topic;
         this.m_fullTopicListRef = p_topics;
-        this.m_topicProportionSum = 0;
-        for ( index in p_topics ){
-            this.m_topicProportionSum += p_topics[index][1];
-        }
+        this.m_topicProportionSum =  Object.keys(p_topics).reduce(function(a, b) { return p_topics[a] + p_topics[b]; }, 0);
         this.m_numberRects = p_numberTopics;
-        var topicsSorted = Object.keys(p_topics).sort(function(a, b) { return p_topics[a][1] - p_topics[b][1]; });
+        var topicsSorted = Object.keys(p_topics).sort(function(a, b) { return p_topics[a] - p_topics[b]; });
 
         // Should be topicsSorted.length - 2 since top topic rect will be represented by TopicRectangle stroke?
         this.m_topTopics = [];
         for ( var index = topicsSorted.length - 1, rectCount = 0; index >= 0 && rectCount < this.m_numberRects; index--, rectCount++ ) {
-            this.m_topTopics.push([topicsSorted[index], p_topics[topicsSorted[index]][1]])
+            this.m_topTopics.push([topicsSorted[index], p_topics[topicsSorted[index]]])
         }
+        this.CalculateSize();
     };
     namespace.TopicRectangle.inherits(namespace.DataShape);
 
     namespace.TopicRectangle.method("AddTextTag", function(p_text, p_fontSize, p_color, p_position, p_opacity){
+        p_position.x = p_position.x < 0 ? 70 : p_position.x
 
         this.m_textTag = this.m_shapeGroup.append("text")
                                          .attr("class", this.m_panel.s_datashapeTextClassName)
-                                         .attr("dx", "0")
-                                         .attr("dy", "0")
                                          .attr("fill", p_color)
                                          .style("font-family", namespace.Level.prototype.s_fontFamily)
                                          .style("font-size", p_fontSize)
-                                         .style("position", "relative");
+                                         .style("position", "relative")
+                                         .attr("x", p_position.x)
+                                         .attr("y", p_position.y);
 
         var dy = textFlow(p_text,
                           this.m_textTag[0][0],
@@ -668,9 +658,9 @@ var TWiC = (function(namespace){
                           namespace.TopicBar.prototype.s_textInfo.yIncrement, false);
 
         this.m_textTag.selectAll("tspan")
-               .attr("x", p_position.x)
-               .attr("y", p_position.y)
-               .style("opacity", p_opacity);
+               .style("opacity", p_opacity)
+            .attr("x", p_position.x)
+            .attr("y", p_position.y);
     });
 
     namespace.TopicRectangle.method("BuildTipLines", function(){
@@ -703,7 +693,9 @@ var TWiC = (function(namespace){
 
     namespace.TopicRectangle.method("CalculateSize", function(){
 
-        var maxLineCount = this.m_data.lines_and_colors.length;
+        // var maxLineCount = this.m_data.lines_and_colors.length;
+        var maxLineCount = 2;
+        var titleFixLength = 200;
         if ( maxLineCount > namespace.TopicRectangle.prototype.s_maxLinesInRect ){
             maxLineCount = namespace.TopicRectangle.prototype.s_maxLinesInRect;
         }
@@ -715,7 +707,7 @@ var TWiC = (function(namespace){
 
         for ( var index = 0; index < maxLineCount; index ++ ) {
 
-            var wordCountPixels = Object.keys(this.m_data.lines_and_colors[index][0]).length * namespace.TopicRectangle.prototype.wordLength;
+            var wordCountPixels = titleFixLength * namespace.TopicRectangle.prototype.wordLength;
             if ( wordCountPixels > this.m_size["width"] ) {
                 this.m_size.width = wordCountPixels;
             }
@@ -738,14 +730,15 @@ var TWiC = (function(namespace){
                                              .attr("id", "twic_clusterrect_" + this.m_level.m_objectCount);
 
         this.m_level.m_objectCount += 1;
+        rectCnt = this.m_topTopics.length > this.m_numberRects ? this.m_numberRects : this.m_topTopics.length;
+        var delta = this.m_numberRects-rectCnt + 1
 
         // Add each topic rectangle, binding data to it (Index 0 will represent the TopicRectangle at the center)
-        for ( var index = this.m_numberRects - 1, rectsDrawn = 0; index > 0; index--, rectsDrawn++ ){
-
+        for ( var index = this.m_numberRects - delta, rectsDrawn = 0; index > 0; index--, rectsDrawn++ ){
             var data = {
 
                 // Color
-                "color" : this.m_level.m_topicColors[this.m_topTopics[index][0]],
+                "color" : this.m_level.m_topicColors[parseInt(this.m_topTopics[index][0])],
 
                 // Topic ID
                 "topicID" : this.m_topTopics[index][0],
@@ -919,105 +912,13 @@ var TWiC = (function(namespace){
                                        .attr("ry", namespace.TopicRectangle.prototype.cornerRadius)
                                        .style("stroke-width", namespace.TopicRectangle.prototype.borderWidth)
                                        .style("stroke", this.m_level.m_topicColors[this.m_clusterIndex])
-                                       .style("fill", namespace.TopicRectangle.prototype.fillColor)
+                                       // .style("fill", namespace.TopicRectangle.prototype.fillColor)
                                        .style("position", "absolute");
 
         // Text lines starting point
         this.m_startingPosition = { x: this.m_coordinates.x + namespace.TopicRectangle.prototype.spaceAroundText,
                                     y: this.m_coordinates.y + namespace.TopicRectangle.prototype.spaceBetweenLines };
 
-        // Create a path element for each word on each line (NOTE: We'll see how expensive this is)
-        // New check for max lines allowable in rect
-        for ( var index = 0; index < this.m_data.lines_and_colors.length &&
-              index < namespace.TopicRectangle.prototype.s_maxLinesInRect; index++ ) {
-
-            var lcArray = [];
-            //var wordIndices = Object.keys(this.m_data.lines_and_colors[index][1]);
-            var lineLength = this.m_data.lines_and_colors[index][0].length;
-            for ( var index2 = 0; index2 < lineLength; index2++ ) {
-                /*if ( undefined !== wordIndices[index2] ){
-                    lcArray.push({ "l": index, "w": wordIndices[index2] });
-                } else {
-                    lcArray.push({"l": index, "w": index2 })
-                }*/
-                lcArray.push({"l": index, "w": index2});
-            }
-
-            textRectGroup.append("g")
-                         .attr("class", "line" + index)
-                         .style("position", "absolute")
-                         .selectAll("path")
-                         .data(lcArray)
-                         .enter()
-                         .append("path")
-                         .attr("class", namespace.TopicRectangle.prototype.s_datashapeClassName)
-                         .style("stroke", function(d) {
-
-                             var topic_color_index = this.m_data.lines_and_colors[d.l][1][d.w];
-                             //if ( -1 == topic_color_index ){
-                             if ( undefined == topic_color_index ){
-                                 return namespace.TopicRectangle.prototype.defaultFontColor;
-                             }
-                             else {
-                                 return this.m_level.m_topicColors[topic_color_index];
-                             }
-                         }.bind(this))
-                         .style("stroke-width", namespace.TopicRectangle.prototype.strokeWidth + "px")
-                         .attr("d", function(d) {
-
-                             if ( "0" == d.w ) {
-
-                                 this.m_startingPosition.x = (2 * namespace.TopicRectangle.prototype.spaceAroundText) + this.m_coordinates.x;
-                                 if ( d.l > 0 ) {
-                                     this.m_startingPosition.y += namespace.TopicRectangle.prototype.spaceBetweenLines + namespace.TopicRectangle.prototype.strokeWidth;
-                                 } else {
-                                     this.m_startingPosition.y += namespace.TopicRectangle.prototype.spaceAroundText;
-                                 }
-                             }
-
-                             var pathString = "M " + this.m_startingPosition.x + "," + this.m_startingPosition.y +
-                                              " " + (this.m_startingPosition.x + namespace.TopicRectangle.prototype.wordLength) +
-                                              "," + this.m_startingPosition.y;
-                             this.m_startingPosition.x += namespace.TopicRectangle.prototype.wordLength;
-
-                             return pathString;
-                         }.bind(this))
-                         .style("position", "absolute")
-                         .style("opacity", function(d){
-
-                             var topic_color_index = this.m_data.lines_and_colors[d.l][1][d.w];
-                             //if ( -1 == topic_color_index ){
-                             if ( undefined == topic_color_index ){
-                                 return 1.0;
-                             } else {
-                                 return 1.0;
-                             }
-                         }.bind(this));
-                         /*.on(namespace.Interaction.mouseover, function(d){
-
-                             var d = { topicID: this.m_data.lines_and_colors[d.l][1][d.w],
-                                       color: this.m_level.m_topicColors[this.m_data.lines_and_colors[d.l][1][d.w]] };
-
-                             if ( -1 != d.topicID ) {
-
-                                 for ( var index = 0; index < this.m_panel.m_linkedViews.length; index++ ){
-
-                                     if ( namespace.Interaction.mouseover == this.m_panel.m_linkedViews[index].update ) {
-                                         this.m_panel.m_linkedViews[index].panel.Update(d, namespace.Interaction.mouseover);
-                                     }
-                                 }
-                             }
-                         }.bind(this))
-                         .on(namespace.Interaction.mouseout, function(d){
-
-                             for ( var index = 0; index < this.m_panel.m_linkedViews.length; index++ ){
-
-                                 if ( namespace.Interaction.mouseover == this.m_panel.m_linkedViews[index].update ) {
-                                     this.m_panel.m_linkedViews[index].panel.Update(null, namespace.Interaction.mouseover);
-                                 }
-                             }
-                         }.bind(this));*/
-        }
     });
 
     namespace.TopicRectangle.method("IsPointInRect", function(p_point){
@@ -1434,7 +1335,7 @@ var TWiC = (function(namespace){
     namespace.TopicRectangle.prototype.wordLength = 2 * namespace.TopicRectangle.prototype.multiplier;
     namespace.TopicRectangle.prototype.spaceBetweenLines = 2 * namespace.TopicRectangle.prototype.multiplier;
 
-    namespace.TopicRectangle.prototype.defaultFontColor = namespace.Level.prototype.s_palette.gold;
+    namespace.TopicRectangle.prototype.defaultFontColor = namespace.Level.prototype.s_palette.hide;
     namespace.TopicRectangle.prototype.jsonDirectory = TWiC.Level.prototype.s_jsonDirectory + "texts/";
 
     namespace.TopicRectangle.prototype.s_shapeChar = "r";

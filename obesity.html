@@ -88,7 +88,8 @@
         <script type="text/javascript">
             twicData = TWiC.m_data;
             twicData.LoadJSON(TWiC.Data.prototype.s_jsonDirectory + "obesity_corpus_info.json",
-                TWiC.Data.prototype.s_jsonDirectory + "obesity_corpus_map.json");
+                TWiC.Data.prototype.s_jsonDirectory + "obesity_corpus_map.json",
+                TWiC.Data.prototype.s_jsonDirectory + "obesity_doc_info.json");
             // Once JSON has loaded, create and start the level
             twicData.m_queue.await(function () {
                 var twicLevel = TWiC.Level.prototype.Instance();

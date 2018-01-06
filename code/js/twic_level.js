@@ -225,6 +225,7 @@ var TWiC = (function(namespace){
         this.m_corpusInfo = {};
         this.m_topicWordLists = {};
         this.m_topicColors = {};
+        this.m_docInfo = {}
 
         this.m_controlBar = null;
 
@@ -381,6 +382,7 @@ var TWiC = (function(namespace){
         this.m_corpusInfo = p_data.m_corpusInfo;
         this.m_topicWordLists = p_data.m_topicWordLists;
         this.m_topicColors = p_data.m_topicColors;
+        this.m_docInfo = p_data.m_docInfo;
         this.PreblendTopicColors();
     });
 

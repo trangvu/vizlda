@@ -633,7 +633,7 @@ var TWiC = (function(namespace){
 
 
     // High level corpus view (TWiC.CorpusView)
-    namespace.CorpusView = function(p_coordinates, p_size, p_level, p_radius, p_numberTopics){
+    namespace.CorpusView = function(p_coordinates, p_size, p_level, p_radius, p_numberTopics, enableCorpusView){
 
         namespace.GraphView.apply(this, arguments);
 
@@ -642,6 +642,7 @@ var TWiC = (function(namespace){
 
         this.m_corpusCluster = null;
         this.m_nodes = [];
+        this.m_enableCorpusView = enableCorpusView || false;
     };
     namespace.CorpusView.inherits(namespace.GraphView);
 
@@ -785,7 +786,7 @@ var TWiC = (function(namespace){
             // Double-clicks can come through, even if the CorpusView is paused
 
             // Tell the level to open the underlying panel (CorpusClusterView) if not open
-            if ( !this.IsUnderlyingPanelOpen() ){
+            if ( !this.IsUnderlyingPanelOpen() && this.m_enableCorpusView){
 
                 this.Pause(false);
                 this.Update({ topicID: this.m_level.m_highlightedTopic,
@@ -4223,17 +4224,6 @@ var TWiC = (function(namespace){
                                         .attr("class","group_twic_graph_overlay")
                                         .attr("id", "group_twic_graph_overlay_publicationview_" + this.m_name);
 
-        this.m_clickRectangle = this.m_groupOverlay.append("rect")
-                                                   .attr("x", 0)
-                                                   .attr("y", 0)
-                                                   .attr("width", this.m_size.width)
-                                                   .attr("height", this.m_size.height)
-                                                   .attr("fill", namespace.Level.prototype.s_palette.darkblue)
-                                                   .style("opacity", 0)
-                                                   .on(namespace.Interaction.click, function(){
-                                                       namespace.GraphView.prototype.MouseBehavior(this, null, namespace.Interaction.click);
-                                                   }.bind(this));
-
         this.m_clusterSvgGroup = this.m_groupOverlay.append("g").attr("id", "clustersvg_group")
                                                        .attr("width", this.m_size.width)
                                                        .attr("height", this.m_size.height);
@@ -4252,7 +4242,7 @@ var TWiC = (function(namespace){
         // this.MakeDraggable();
 
         // Text View will be open
-        this.m_underlyingPanelOpen = true;
+        // this.m_underlyingPanelOpen = true;
     });
 
     namespace.PublicationView.method("Start", function(){
@@ -4276,19 +4266,19 @@ var TWiC = (function(namespace){
             var pageInfo = []; // {start: "", mid: ""} start is absolute to the panel, mid is relative to start
             var currentHeight = 0;
 
-            var pagesStartPosition = this.m_size.height >> 4; // Starting position for texts is 1/8 panel height
-            var pageSpacing = this.m_size.height >> 3;
+            var pagesStartPosition = this.m_size.height >> 5; // Starting position for texts is 1/8 panel height
+            var pageSpacing = this.m_size.height >> 4;
             var currentPagesOffset = pagesStartPosition;
             var currentRadius = 0;
             for ( var index = 0; index < this.m_twicObjects.length; index++ ){
 
-                if ( index + 1 < this.m_twicObjects.length && parseInt(this.m_data.texts[index].page)  > currentPage ){
+                // if ( index + 1 < this.m_twicObjects.length && parseInt(this.m_data.texts[index].page)  > currentPage ){
 
                     pageInfo.push({start: currentPagesOffset, mid: currentHeight >> 1, r: currentRadius});
                     currentPagesOffset += currentHeight + pageSpacing;
                     currentHeight = 0;
                     currentPage++
-                }
+                // }
 
                 if ( this.m_twicObjects[index].m_size.height + (namespace.TopicRectangle.prototype.borderWidth * 2 * this.m_numberTopics) > currentHeight ){
                     currentHeight = this.m_twicObjects[index].m_size.height + (namespace.TopicRectangle.prototype.borderWidth * 2 * this.m_numberTopics);
@@ -4304,11 +4294,11 @@ var TWiC = (function(namespace){
             for ( var index = 0; index < this.m_twicObjects.length; index++ ){
 
                 // Determine if texts are on the next "page"
-                if ( parseInt(this.m_data.texts[index].page) - 1 > currentPage ){
+                // if ( parseInt(this.m_data.texts[index].page) - 1 > currentPage ){
 
                     currentPage++;
                     currentXOffset = textSpacing;
-                }
+                // }
 
                 // Determine the text coordinates via its page and item count
                 this.m_twicObjects[index].m_coordinates = { x: currentXOffset,
@@ -4347,32 +4337,10 @@ var TWiC = (function(namespace){
             // Draw the lines in between texts and the titles for each text
             currentPage = 0;
             for ( var index = 0; index < this.m_twicObjects.length; index++ ){
-
-                // Determine if texts are on the next "page"
-                if ( parseInt(this.m_data.texts[index].page) - 1 > currentPage ){
-
-                    currentPage++;
-                }
-
-                // Draw the line between this and the next text
-                if ( index + 1 < this.m_twicObjects.length &&
-                     this.m_data.texts[index + 1].page == this.m_data.texts[index].page){
-
-                    this.m_clusterSvgGroup.append("line")
-                                          .attr("stroke-linecap", "square")
-                                          .attr("x1", this.m_twicObjects[index].m_coordinates.x /*+ (this.m_twicObjects[index].m_size.width >> 1)*/ + this.m_twicObjects[index].m_size.width + (this.m_numberTopics * namespace.TopicRectangle.prototype.borderWidth))
-                                          .attr("y1", pageInfo[currentPage].start + pageInfo[currentPage].mid)
-                                          .attr("x2", this.m_twicObjects[index + 1].m_coordinates.x/* + (this.m_twicObjects[index + 1].m_size.width >> 1)*/ - (this.m_numberTopics * namespace.TopicRectangle.prototype.borderWidth))
-                                          .attr("y2", pageInfo[currentPage].start + pageInfo[currentPage].mid)
-                                          .style("stroke", namespace.Level.prototype.s_palette.gold)
-                                          .style("stroke-width", 5)
-                                          .style("opacity", TWiC.TopicBullseye.s_semihighlightedOpacity);
-                }
-
                 // Add the title of the text below the text rectangle
-                this.m_twicObjects[index].AddTextTag(this.m_data.texts[index].title, 20, TWiC.Level.prototype.s_palette.gold,
-                                                     {x: this.m_twicObjects[index].m_coordinates.x - ((7 * this.m_data.texts[index].title.length) >> 1),
-                                                      y: this.m_twicObjects[index].m_coordinates.y + (2.85 * this.m_twicObjects[index].m_radius)},
+                this.m_twicObjects[index].AddTextTag(this.m_data[index].title, 20, TWiC.Level.prototype.s_palette.gold,
+                                                     {x: this.m_twicObjects[index].m_coordinates.x - ((7 * this.m_data[index].title.length) >> 1),
+                                                      y: this.m_twicObjects[index].m_coordinates.y + 15},
                                                      0.0);
 
             }
@@ -4635,49 +4603,34 @@ var TWiC = (function(namespace){
     });
 
     namespace.PublicationView.method("Load", function(){
+        var data = this.m_level.m_docInfo.docs;
+        var cnt = data.length < 20 ? data.length : 20;
+        for (var index = 0; index < cnt; index++) {
+            //Find top topic of current document
+            var props = data[index].topic
+            topic = Object.keys(props).reduce(function(a, b){ return props[a] > props[b] ? a : b });
 
-        this.m_level.m_queue.defer(function(callback) {
+            var topTopic = {id: topic, value: props[topic]};
 
-            d3.json(TWiC.Level.prototype.s_jsonDirectory + this.m_filename, function(error, data){
+            var textRectangle = new TWiC.TopicRectangle({x: 0, y: 0}, {width: 0, height: 0},
+                index, this.m_level,
+                this, this.m_linkedViews,
+                topTopic.id,
+                this.m_numberTopics);
 
-                this.m_data = data;
-                max = this.m_data.count < 20 ? this.m_data.count : 20;
+            // Load the individual JSON for this text
+            // textRectangle.Load();
+            textRectangle.SetTitle();
 
-                for ( var index = 0; index < max; index++ ){
-                    //Find top topic of current document
-                    props = this.m_level.m_corpusInfo.file_info[this.m_data.texts[index].file].prop
-                    var topTopic = {id: 0, value: props["0"][0]};
+            var textrect_json = {
+                "name": data[index].title,
+                "topics": props,
+            };
 
-                    for ( var index2 = 0; index2 < Object.keys(props).length; index2++ ){
-                        if ( props[index2][0] == 1 ){
-                            topTopic.id = index2;
-                            topTopic.value = props[index2][0];
-                            break;
-                        }
-                    }
-                    var textRectangle = new TWiC.TopicRectangle({x:0,y:0}, {width:0,height:0},
-                                                               this.m_data.texts[index].file, this.m_level,
-                                                               this, this.m_linkedViews,
-                                                               topTopic.id,
-                                                               this.m_numberTopics);
-
-                    // Load the individual JSON for this text
-                    textRectangle.Load();
-                    textRectangle.SetTitle(this.m_data.texts[index].title);
-
-                    var textrect_json = {
-                        "name": this.m_data.texts[index].title,
-                        "topics": this.m_level.m_corpusInfo.file_info[this.m_data.texts[index].file][2],
-                    };
-
-                    this.m_objectsJSON.push(textrect_json);
-                    this.m_twicObjects.push(textRectangle);
-                }
-
-                callback(null, data);
-            }.bind(this));
-        }.bind(this));
-
+            this.m_objectsJSON.push(textrect_json);
+            this.m_twicObjects.push(textRectangle);
+        }
+        this.m_data = data
         // Will have to load the individual text JSONs as well here or elsewhere once the
         var x = 0;
     });
@@ -4882,9 +4835,9 @@ var TWiC = (function(namespace){
         for ( var topic_index = 0; topic_index < this.m_level.m_topicWordLists.length; topic_index++ ) {
 
             topicStr = "Topic " + topic_index.toString() + ": ";
-            for ( var word_index = 0; word_index < this.m_level.m_topicWordLists[topic_index].length; word_index++ ){
+            for ( var word_index = 0; word_index < this.m_level.m_topicWordLists[topic_index].words.length; word_index++ ){
 
-                topicStr += this.m_level.m_topicWordLists[topic_index][word_index] + " ";
+                topicStr += this.m_level.m_topicWordLists[topic_index].words[word_index] + " ";
             }
             topicStrArray.push(topicStr.trim());
         }
@@ -5397,7 +5350,7 @@ var TWiC = (function(namespace){
 
                         // Find the dist2avg for this text
                         /*for ( var index = 0; index < p_data.shapeRef.m_panel.m_objectsJSON.length; index++ ){
-                            if ( p_data.shapeRef.m_panel.m_objectsJSON[index].name == p_data.shapeRef.m_fileID ){
+                            if ( p_data.shapeRef.m_panel.m_objectsJSON[index].name == p_data.shapeRef.m_docIndex ){
                                 dist2avg = p_data.shapeRef.m_panel.m_objectsJSON[index].dist2avg;
                                 break;
                             }
