@@ -4261,101 +4261,105 @@ var TWiC = (function(namespace){
             // Can only make resizable once control bar text is in place
             this.MakeResizable(false);
 
-            // Calculate mid-point positions for each page
-            var currentPage = 0;
-            var pageInfo = []; // {start: "", mid: ""} start is absolute to the panel, mid is relative to start
-            var currentHeight = 0;
-
-            var pagesStartPosition = this.m_size.height >> 5; // Starting position for texts is 1/8 panel height
-            var pageSpacing = this.m_size.height >> 4;
-            var currentPagesOffset = pagesStartPosition;
-            var currentRadius = 0;
-            for ( var index = 0; index < this.m_twicObjects.length; index++ ){
-
-                // if ( index + 1 < this.m_twicObjects.length && parseInt(this.m_data.texts[index].page)  > currentPage ){
-
-                    pageInfo.push({start: currentPagesOffset, mid: currentHeight >> 1, r: currentRadius});
-                    currentPagesOffset += currentHeight + pageSpacing;
-                    currentHeight = 0;
-                    currentPage++
-                // }
-
-                if ( this.m_twicObjects[index].m_size.height + (namespace.TopicRectangle.prototype.borderWidth * 2 * this.m_numberTopics) > currentHeight ){
-                    currentHeight = this.m_twicObjects[index].m_size.height + (namespace.TopicRectangle.prototype.borderWidth * 2 * this.m_numberTopics);
-                    currentRadius = this.m_twicObjects[index].m_radius;
-                }
-            }
-            pageInfo.push({start: currentPagesOffset, mid: currentHeight >> 1, r: currentRadius});
-
-            // Draw the text rectangles and resize the panel as necessary
-            var textSpacing = this.m_size.width >> 4; // Text spacing is 1/8 the width of the panel
-            var currentXOffset = textSpacing;
-            currentPage = 0;
-            for ( var index = 0; index < this.m_twicObjects.length; index++ ){
-
-                // Determine if texts are on the next "page"
-                // if ( parseInt(this.m_data.texts[index].page) - 1 > currentPage ){
-
-                    currentPage++;
-                    currentXOffset = textSpacing;
-                // }
-
-                // Determine the text coordinates via its page and item count
-                this.m_twicObjects[index].m_coordinates = { x: currentXOffset,
-                                                            y: pageInfo[currentPage].start + pageInfo[currentPage].mid - (this.m_twicObjects[index].m_size.height >> 1) };
-
-                // Draw the text rectangle and rectangular topic "bullseye"
-                this.m_twicObjects[index].Draw();
-
-                // Alter the svg, panel rectangle, and divs to the needed limits to fit all of the texts
-                if ( index + 1 == this.m_twicObjects.length ){
-
-                    // Resize the svg and panel rectangle
-                    var rectGrowth = pageInfo[currentPage].start + (2 * pageInfo[currentPage].mid) + (pageInfo[currentPage].r);
-                    this.m_svg.attr("height", rectGrowth)
-                              .attr("viewBox", "0 0 " + this.m_size.width + " " + rectGrowth);
-                    this.m_panelRectSvg.attr("height", rectGrowth)
-                                       .attr("viewBox", "0 0 " + this.m_size.width + " " + rectGrowth);
-                    this.m_container.m_div.selectAll(".rect_twic_graph").remove();
-                    this.m_panelRect = this.m_panelRectSvg.append("path")
-                                                          .attr("d", namespace.BottomRoundedRect(0,
-                                                                                                 0,
-                                                                                                 this.m_size.width,
-                                                                                                 rectGrowth,
-                                                                                                 namespace.Panel.prototype.s_borderRadius))
-                                                          .attr("class", "rect_twic_graph")
-                                                          .attr("id", "rect_twic_graph_publicationview_" + this.m_name)
-                                                          .attr("fill", namespace.Level.prototype.s_palette.darkblue)
-                                                          .style("position", "absolute");
-                    this.m_div.style("border-radius", namespace.Panel.prototype.s_borderRadius);
-                    this.m_panelRectDiv.style("border-radius", namespace.Panel.prototype.s_borderRadius);
-                }
-
-                currentXOffset += textSpacing + this.m_twicObjects[index].m_size.width + (namespace.TopicRectangle.prototype.borderWidth * 2 * this.m_numberTopics);
-            }
-
-            // Draw the lines in between texts and the titles for each text
-            currentPage = 0;
-            for ( var index = 0; index < this.m_twicObjects.length; index++ ){
-                // Add the title of the text below the text rectangle
-                var docId = this.m_objectsJSON[index].id;
-                this.m_twicObjects[index].AddTextTag(this.m_data[docId].title, 20, TWiC.Level.prototype.s_palette.gold,
-                                                     {x: this.m_twicObjects[index].m_coordinates.x - ((7 * this.m_data[docId].title.length) >> 1),
-                                                      y: this.m_twicObjects[index].m_coordinates.y + 15},
-                                                     0.0);
-
-            }
-
-            // Re-append all text rectangles to the DOM to make sure they are above the joining lines
-            for ( var index = 0; index < this.m_twicObjects.length; index++ ){
-                var textRectGroup = d3.select("#textrect_node_" + this.m_twicObjects[index].m_name);
-                textRectGroup.node().parentNode.appendChild(textRectGroup.node());
-            }
+            this.Render();
 
             // Start with all data shapes highlights
             this.HighlightAllDataShapes(true);
 
         }.bind(this));
+    });
+
+    namespace.PublicationView.method("Render", function(){
+        // Calculate mid-point positions for each page
+        var currentPage = 0;
+        var pageInfo = []; // {start: "", mid: ""} start is absolute to the panel, mid is relative to start
+        var currentHeight = 0;
+
+        var pagesStartPosition = this.m_size.height >> 5; // Starting position for texts is 1/8 panel height
+        var pageSpacing = this.m_size.height >> 4;
+        var currentPagesOffset = pagesStartPosition;
+        var currentRadius = 0;
+        for ( var index = 0; index < this.m_twicObjects.length; index++ ){
+
+            // if ( index + 1 < this.m_twicObjects.length && parseInt(this.m_data.texts[index].page)  > currentPage ){
+
+            pageInfo.push({start: currentPagesOffset, mid: currentHeight >> 1, r: currentRadius});
+            currentPagesOffset += currentHeight + pageSpacing;
+            currentHeight = 0;
+            currentPage++
+            // }
+
+            if ( this.m_twicObjects[index].m_size.height + (namespace.TopicRectangle.prototype.borderWidth * 2 * this.m_numberTopics) > currentHeight ){
+                currentHeight = this.m_twicObjects[index].m_size.height + (namespace.TopicRectangle.prototype.borderWidth * 2 * this.m_numberTopics);
+                currentRadius = this.m_twicObjects[index].m_radius;
+            }
+        }
+        pageInfo.push({start: currentPagesOffset, mid: currentHeight >> 1, r: currentRadius});
+
+        // Draw the text rectangles and resize the panel as necessary
+        var textSpacing = this.m_size.width >> 4; // Text spacing is 1/8 the width of the panel
+        var currentXOffset = textSpacing;
+        currentPage = 0;
+        for ( var index = 0; index < this.m_twicObjects.length; index++ ){
+
+            // Determine if texts are on the next "page"
+            // if ( parseInt(this.m_data.texts[index].page) - 1 > currentPage ){
+
+            currentPage++;
+            currentXOffset = textSpacing;
+            // }
+
+            // Determine the text coordinates via its page and item count
+            this.m_twicObjects[index].m_coordinates = { x: currentXOffset,
+                y: pageInfo[currentPage].start + pageInfo[currentPage].mid - (this.m_twicObjects[index].m_size.height >> 1) };
+
+            // Draw the text rectangle and rectangular topic "bullseye"
+            this.m_twicObjects[index].Draw();
+
+            // Alter the svg, panel rectangle, and divs to the needed limits to fit all of the texts
+            if ( index + 1 == this.m_twicObjects.length ){
+
+                // Resize the svg and panel rectangle
+                var rectGrowth = pageInfo[currentPage].start + (2 * pageInfo[currentPage].mid) + (pageInfo[currentPage].r);
+                this.m_svg.attr("height", rectGrowth)
+                    .attr("viewBox", "0 0 " + this.m_size.width + " " + rectGrowth);
+                this.m_panelRectSvg.attr("height", rectGrowth)
+                    .attr("viewBox", "0 0 " + this.m_size.width + " " + rectGrowth);
+                this.m_container.m_div.selectAll(".rect_twic_graph").remove();
+                this.m_panelRect = this.m_panelRectSvg.append("path")
+                    .attr("d", namespace.BottomRoundedRect(0,
+                        0,
+                        this.m_size.width,
+                        rectGrowth,
+                        namespace.Panel.prototype.s_borderRadius))
+                    .attr("class", "rect_twic_graph")
+                    .attr("id", "rect_twic_graph_publicationview_" + this.m_name)
+                    .attr("fill", namespace.Level.prototype.s_palette.darkblue)
+                    .style("position", "absolute");
+                this.m_div.style("border-radius", namespace.Panel.prototype.s_borderRadius);
+                this.m_panelRectDiv.style("border-radius", namespace.Panel.prototype.s_borderRadius);
+            }
+
+            currentXOffset += textSpacing + this.m_twicObjects[index].m_size.width + (namespace.TopicRectangle.prototype.borderWidth * 2 * this.m_numberTopics);
+        }
+
+        // Draw the lines in between texts and the titles for each text
+        currentPage = 0;
+        for ( var index = 0; index < this.m_twicObjects.length; index++ ){
+            // Add the title of the text below the text rectangle
+            var docId = this.m_objectsJSON[index].id;
+            this.m_twicObjects[index].AddTextTag(this.m_data[docId].title, 20, TWiC.Level.prototype.s_palette.gold,
+                {x: this.m_twicObjects[index].m_coordinates.x - ((7 * this.m_data[docId].title.length) >> 1),
+                    y: this.m_twicObjects[index].m_coordinates.y + 15},
+                0.0);
+
+        }
+
+        // Re-append all text rectangles to the DOM to make sure they are above the joining lines
+        for ( var index = 0; index < this.m_twicObjects.length; index++ ){
+            var textRectGroup = d3.select("#textrect_node_" + this.m_twicObjects[index].m_name);
+            textRectGroup.node().parentNode.appendChild(textRectGroup.node());
+        }
     });
 
     namespace.PublicationView.method("Update", function(p_data, p_updateType){
@@ -4406,6 +4410,24 @@ var TWiC = (function(namespace){
 
             }
         }
+        if ( p_updateType && p_updateType == namespace.Interaction.search) {
+            this.QueryDocumentsAndUpdateView(p_data);
+            console.log(p_data);
+        }
+    });
+
+    namespace.PublicationView.method("QueryDocumentsAndUpdateView", function(p_data){
+        this.ClearView();
+        this.Load(p_data);
+        this.Render();
+
+        // Start with all data shapes highlights
+        this.HighlightAllDataShapes(true);
+    });
+
+    namespace.PublicationView.method("ClearView", function(p_data){
+        this.m_clusterSvgGroup.selectAll("*").remove();
+
     });
 
     namespace.PublicationView.method("AddBarText", function(p_altText){
@@ -4603,12 +4625,26 @@ var TWiC = (function(namespace){
         });
     });
 
-    namespace.PublicationView.method("Load", function(){
+    namespace.PublicationView.method("Load", function(p_options){
+        var keys = null;
         var data = this.m_level.m_docInfo.docs;
         var cnt = data.length < 20 ? data.length : 20;
-        for (var index = 0; index < cnt; index++) {
+        if (p_options == undefined || p_options['cat'] == 0) {
+            keys = Object.keys(data).slice(0, cnt);
+        } else {
+            var cat = this.m_level.m_categories[p_options['cat']-1];
+            keys = this.m_level.m_docInfo.tag_index[cat];
+            if (keys.length > cnt) {
+                keys = keys.slice(0,cnt);
+            }
+        }
+        this.m_objectsJSON = [];
+        this.m_twicObjects = [];
+
+
+        for (var index = 0; index < keys.length; index++) {
             //Find top topic of current document
-            var key = Object.keys(data)[index]
+            var key = keys[index]
             var props = data[key].topic
             topic = Object.keys(props).reduce(function(a, b){ return props[a] > props[b] ? a : b });
 

@@ -8,7 +8,8 @@ var TWiC = (function(namespace){
         mouseover: "mouseover",
         mouseout: "mouseout",
         click: "click",
-        dblclick: "dblclick"
+        dblclick: "dblclick",
+        search: "search"
     };
 
     // From http://haacked.com/archive/2009/12/29/convert-rgb-to-hex.aspx/
@@ -225,7 +226,8 @@ var TWiC = (function(namespace){
         this.m_corpusInfo = {};
         this.m_topicWordLists = {};
         this.m_topicColors = {};
-        this.m_docInfo = {}
+        this.m_docInfo = {};
+        this.m_categories = [];
 
         this.m_controlBar = null;
 
@@ -383,6 +385,7 @@ var TWiC = (function(namespace){
         this.m_topicWordLists = p_data.m_topicWordLists;
         this.m_topicColors = p_data.m_topicColors;
         this.m_docInfo = p_data.m_docInfo;
+        this.m_categories = p_data.m_categories;
         this.PreblendTopicColors();
     });
 

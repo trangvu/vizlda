@@ -3,14 +3,31 @@
  */
 
 var Searcher = (function(namespace) {
+    namespace.Store = function(){};
+    namespace.Store.prototype.s_searchListener = [];
     namespace.searchDocs = function() {
         selectEle = document.getElementById("cat-select");
         var cat = selectEle.options[selectEle.selectedIndex].value;
         $("#search-dropdown").removeClass("open");
         var keyword = document.getElementById("keyword").value;
+        var data = {}
+        data['cat'] = cat;
+        data['keyword'] = keyword;
+        this.dispatchSearchEvent(data);
         this.goToTab("#tab03");
         //TODO: update list documents
         return false;
+    }
+
+    namespace.registerSearchEvent = function(element) {
+        namespace.Store.prototype.s_searchListener.push(element);
+    }
+
+    namespace.dispatchSearchEvent = function(data) {
+        var elements = namespace.Store.prototype.s_searchListener;
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].Update(data,"search");
+        }
     }
 
     namespace.goToTab = function(tabId) {
