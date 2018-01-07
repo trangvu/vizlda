@@ -26,6 +26,7 @@
     <script type="text/javascript" src="code/js/twic_level.js"></script>
     <script type="text/javascript" src="code/js/twic_panel.js"></script>
     <script type="text/javascript" src="code/js/twic_datashape.js"></script>
+    <script type="text/javascript" src="code/js/search.js"></script>
     <!-- <script type="text/javascript" src="lib/twic_lib.min.js"></script> -->
 </head>
 <body>
@@ -37,30 +38,26 @@
         </div>
         <div class="col-md-4">
             <ul class="nav nav-tabs" id="navtab">
-                <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                <li><a data-toggle="tab" href="#topics">Topic</a></li>
-                <li><a data-toggle="tab" href="#docs">Document</a></li>
-                <li><a data-toggle="tab" href="#words">Word</a></li>
+                <li class="active"><a data-toggle="tab" href="#home" id="tab01">Home</a></li>
+                <li><a data-toggle="tab" href="#topics" id="tab02">Topic</a></li>
+                <li><a data-toggle="tab" href="#docs" id="tab03">Document</a></li>
+                <li><a data-toggle="tab" href="#words" id="tab04">Word</a></li>
             </ul>
         </div>
         <div class="input-group col-md-4 pull-right" id="adv-search" style="padding-top:8;">
             <input type="text" class="form-control" placeholder="Search">
             <div class="input-group-btn">
                 <div class="btn-group" role="group" style="display: flex !important;">
-                    <div class="dropdown dropdown-lg" style="position: static !important;">
+                    <div class="dropdown dropdown-lg" id="search-dropdown" style="position: static !important;">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="border-radius: 0;width: 33;height: 34;margin-left: -1px;">
                             <span class="caret"></span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right col-md-4" role="menu" style="min-width: 420px;margin-top: -1px;padding: 6px 20px;">
-                            <form class="form-horizontal" role="form">
+                            <form class="form-horizontal" role="form" onsubmit="return Searcher.searchDocs()">
                                 <div class="form-group" style="margin-left:0;margin-right:0;">
                                     <label for="filter">Categories</label>
-                                    <select class="form-control">
-                                        <option value="0" selected="">All categories</option>
-                                        <option value="1">Featured</option>
-                                        <option value="2">Most popular</option>
-                                        <option value="3">Top rated</option>
-                                        <option value="4">Most commented</option>
+                                    <select class="form-control" id="cat-select">
+                                        <option value="0" selected="selected">All categories</option>
                                     </select>
                                 </div>
                                 <!--<div class="form-group" style="margin-left:0;margin-right:0;">-->
@@ -69,7 +66,7 @@
                                 <!--</div>-->
                                 <div class="form-group" style="margin-left:0;margin-right:0;">
                                     <label for="contain">Contains the words</label>
-                                    <input class="form-control" type="text">
+                                    <input class="form-control" id="keyword" type="text">
                                 </div>
                                 <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                             </form>
@@ -89,9 +86,11 @@
             twicData = TWiC.m_data;
             twicData.LoadJSON(TWiC.Data.prototype.s_jsonDirectory + "obesity_corpus_info.json",
                 TWiC.Data.prototype.s_jsonDirectory + "obesity_corpus_map.json",
-                TWiC.Data.prototype.s_jsonDirectory + "obesity_doc_info.json");
+                TWiC.Data.prototype.s_jsonDirectory + "obesity_doc_info.json",
+                TWiC.Data.prototype.s_jsonDirectory + "obesity_meta_info.json");
             // Once JSON has loaded, create and start the level
             twicData.m_queue.await(function () {
+                TWiC.m_data.PopulateSearchCategories("#cat-select");
                 var twicLevel = TWiC.Level.prototype.Instance();
                 twicLevel.SetJSONData(TWiC.m_data);
 
@@ -153,7 +152,7 @@
                     {width: screenDims.width >> 1, height: screenDims.height - topicBarHeight}, // Panel size
                     docLevel, // Level reference,
                     "publication view",
-                    "tmn_doc_info.json");
+                    "obesity_doc_info.json");
                 var textView = new TWiC.TextView({x: screenDims.width >> 1, y: 0}, // Panel position
                     {width: screenDims.width >> 2, height: screenDims.height - topicBarHeight}, // Panel size
                     docLevel); // Level reference
@@ -226,26 +225,7 @@
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
         $("ul#navtab > li").on("click", "a", function () {
-            //get displaying tab content jQuery selector
-            var active_tab_selector = $('.nav-tabs > li.active > a').attr('href');
-
-            //find actived navigation and remove 'active' css
-            var actived_nav = $('.nav-tabs > li.active');
-            actived_nav.removeClass('in active');
-
-            //add 'active' css into clicked navigation
-            $(this).parents('li').addClass('in active');
-
-            //hide displaying tab content
-            $(active_tab_selector).removeClass('in active');
-            $(active_tab_selector).addClass('hide');
-
-            //show target tab content
-            var target_tab_selector = $(this).attr('href');
-            $(target_tab_selector).removeClass('hide');
-            $(target_tab_selector).addClass('in active');
-            var c = $(".div_twic_level");
-            c.packery();
+            Searcher.goToTab("#" + $(this).attr("id"));
         });
     });
 </script>

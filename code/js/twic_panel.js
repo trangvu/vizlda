@@ -4338,8 +4338,9 @@ var TWiC = (function(namespace){
             currentPage = 0;
             for ( var index = 0; index < this.m_twicObjects.length; index++ ){
                 // Add the title of the text below the text rectangle
-                this.m_twicObjects[index].AddTextTag(this.m_data[index].title, 20, TWiC.Level.prototype.s_palette.gold,
-                                                     {x: this.m_twicObjects[index].m_coordinates.x - ((7 * this.m_data[index].title.length) >> 1),
+                var docId = this.m_objectsJSON[index].id;
+                this.m_twicObjects[index].AddTextTag(this.m_data[docId].title, 20, TWiC.Level.prototype.s_palette.gold,
+                                                     {x: this.m_twicObjects[index].m_coordinates.x - ((7 * this.m_data[docId].title.length) >> 1),
                                                       y: this.m_twicObjects[index].m_coordinates.y + 15},
                                                      0.0);
 
@@ -4607,13 +4608,14 @@ var TWiC = (function(namespace){
         var cnt = data.length < 20 ? data.length : 20;
         for (var index = 0; index < cnt; index++) {
             //Find top topic of current document
-            var props = data[index].topic
+            var key = Object.keys(data)[index]
+            var props = data[key].topic
             topic = Object.keys(props).reduce(function(a, b){ return props[a] > props[b] ? a : b });
 
             var topTopic = {id: topic, value: props[topic]};
 
             var textRectangle = new TWiC.TopicRectangle({x: 0, y: 0}, {width: 0, height: 0},
-                index, this.m_level,
+                key, this.m_level,
                 this, this.m_linkedViews,
                 topTopic.id,
                 this.m_numberTopics);
@@ -4623,8 +4625,9 @@ var TWiC = (function(namespace){
             textRectangle.SetTitle();
 
             var textrect_json = {
-                "name": data[index].title,
+                "name": data[key].title,
                 "topics": props,
+                "id": key
             };
 
             this.m_objectsJSON.push(textrect_json);
