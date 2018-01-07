@@ -723,13 +723,13 @@ var TWiC = (function(namespace){
         this.m_corpusCluster = new TWiC.TopicBullseye({ x: this.m_size.width >> 1,
                                                         y: this.m_size.height - (this.m_size.height * 0.6) },
                                                       this.m_radius,
-                                                      this.m_level.m_corpusMap["name"],
+                                                      this.m_level.m_corpusInfo["name"],
                                                       this.m_level,
                                                       this,
                                                       this.m_linkedViews,
                                                       this.m_numberTopics,
-                                                      this.m_level.m_corpusMap["topics"],
-                                                      this.m_level.m_corpusMap["name"],
+                                                      this.m_level.m_corpusInfo["prop"],
+                                                      this.m_level.m_corpusInfo["name"],
                                                       true);
 
         // Add my text to the container's control bar
@@ -847,7 +847,7 @@ var TWiC = (function(namespace){
                                       .style("font-size", 25);
 
                 p_controlBar.m_barText.append("tspan")
-                                      .html(this.m_level.m_corpusMap["name"])
+                                      .html(this.m_level.m_corpusInfo["name"])
                                       .attr("fill", namespace.Level.prototype.s_palette.lightblue)
                                       .style("font-family", namespace.Level.prototype.s_fontFamily)
                                       .style("font-size", 25);
@@ -1524,7 +1524,7 @@ var TWiC = (function(namespace){
                                       .style("font-size", 21);
 
                 p_controlBar.m_barText.append("tspan")
-                                      .html(this.m_level.m_corpusMap["name"])
+                                      .html(this.m_level.m_corpusInfo["name"])
                                       .attr("fill", namespace.Level.prototype.s_palette.lightblue)
                                       .style("font-family", namespace.Level.prototype.s_fontFamily)
                                       .style("font-size", 21);
@@ -2472,7 +2472,7 @@ var TWiC = (function(namespace){
                                       .style("font-size", 21);
 
                 p_controlBar.m_barText.append("tspan")
-                                      .html(this.m_level.m_corpusMap["name"])
+                                      .html(this.m_level.m_corpusInfo["name"])
                                       .attr("fill", namespace.Level.prototype.s_palette.lightblue)
                                       .style("font-family", namespace.Level.prototype.s_fontFamily)
                                       .style("font-size", 21);
@@ -3015,24 +3015,24 @@ var TWiC = (function(namespace){
 
     namespace.TextView.method("Start", function(){
 
-        if ( "" != this.m_filename ){
-            this.Load();
-        }
+            // this.Load();
     });
 
     namespace.TextView.method("Update", function(p_data, p_updateType){
 
         if ( !this.IsPaused() ) {
 
-            if ( namespace.Interaction.mouseover == p_updateType ) {
+            if (namespace.Interaction.mouseover == p_updateType) {
 
-                if ( null == p_data ) {
+                if (null == p_data) {
                     this.HighlightAllWords();
                 } else {
                     this.DarkenAllWords();
                     this.HighlightTopicText(p_data);
                 }
-            } else {
+            }
+        }
+        if (namespace.Interaction.mouseover != p_updateType) {{
 
                 // Save a reference to the JSON data
                 this.m_data = p_data;
@@ -3110,7 +3110,7 @@ var TWiC = (function(namespace){
                                           .style("font-size", 21);
 
                     p_controlBar.m_barText.append("tspan")
-                                          .html(this.m_level.m_corpusMap["name"])
+                                          .html(this.m_level.m_corpusInfo["name"])
                                           .attr("fill", namespace.Level.prototype.s_palette.lightblue)
                                           .style("font-family", namespace.Level.prototype.s_fontFamily)
                                           .style("font-size", 21);
@@ -3160,7 +3160,8 @@ var TWiC = (function(namespace){
         // 3. Set up the panel components for this new text
 
         // Initial loop for path/panel rectangle resize (rectangle needs to be drawn first)
-        for ( var index = 0; index < p_data.json.lines_and_colors.length; index++ ) {
+        var lines = 1;
+        for ( var index = 0; index < lines; index++ ) {
             currentY += dy;
             if ( currentY > this.m_size.height ){
                 rectGrowth += dy;
@@ -3217,146 +3218,6 @@ var TWiC = (function(namespace){
                                                    this.m_data);
         this.m_topicText.Draw(this.m_containerGroup);
 
-        // Spacing between (optional) title bar and text
-        /*this.m_containerGroup.append("p")
-                             .append("span")
-                             .style("font-family", namespace.Level.prototype.s_fontFamily)
-                             .style("font-size", 22)
-                             .html("&nbsp;")
-
-        for ( var index = 0; index < p_data.json.lines_and_colors.length; index++ ) {
-
-            words = p_data.json.lines_and_colors[index][0].split(" ");
-            var lineText = "";
-
-            currentX = 50;
-            var text;
-
-            var currentLine = this.m_containerGroup.append("p")
-                                                   .style("word-spacing", namespace.Level.prototype.s_fontSpacing.Inconsolata22)
-                                                   .style("display", "inline-block")
-                                                   .style("line-height", "0px");
-
-            // Spacing between div edge and text
-            currentLine.append("span")
-                       .style("font-family", namespace.Level.prototype.s_fontFamily)
-                       .style("font-size", 22)
-                       .style("opacity", 1.0)
-                       .html("&nbsp;&nbsp;&nbsp;&nbsp;");
-
-            for ( var index2 = 0; index2 < words.length; index2++ ) {
-
-                // NOTE: undefined HACK
-                if ( "-1" == p_data.json.lines_and_colors[index][1][index2] ||
-                     undefined == p_data.json.lines_and_colors[index][1][index2] ){
-
-                    text = currentLine.append("span")
-                                                .attr("class", "text_word")
-                                                .style("color", namespace.Level.prototype.s_palette.gold)
-                                                .style("font-family", namespace.Level.prototype.s_fontFamily)
-                                                .style("font-size", 22)
-                                                .style("opacity", 1.0)
-                                                .html(words[index2] + "&nbsp;");
-
-
-                    currentX += text[0][0].offsetWidth * 0.66;
-                }
-                else {
-
-                    var dlocolor = namespace.ShadeBlend(TWiC.DataShape.prototype.s_colorLolight,
-                                                 this.m_level.m_topicColors[p_data.json.lines_and_colors[index][1][index2]]);
-
-                    var quoteType = "";
-                    var quotePlace = "";
-                    var tempWord = words[index2];
-                    if ( "\"" == words[index2][0] || "\'" == words[index2][0] ){
-                        quoteType = words[index2][0];
-                        quotePlace = "b";
-                        tempWord = words[index2].substring(1, words[index2].length);
-                    } else if ( "\"" == words[index2][words[index2].length - 1] || "\'" == words[index2][words[index2].length - 1] ){
-                        quoteType = words[index2][words[index2].length - 1];
-                        quotePlace = "a";
-                        tempWord = words[index2].substring(0, words[index2].length - 1);
-                    }
-
-                    if ( "b" == quotePlace ){
-
-                        text = currentLine.append("span")
-                                                    .attr("class", "text_word")
-                                                    .style("color", namespace.Level.prototype.s_palette.gold)
-                                                    .style("font-family", namespace.Level.prototype.s_fontFamily)
-                                                    .style("font-size", 22)
-                                                    .style("opacity", 1.0)
-                                                    .html(quoteType);
-
-                        currentX += text[0][0].offsetWidth * 0.66;
-                    }
-
-                    tempTempWord = ( quotePlace == "a" ) ? tempWord : tempWord + "&nbsp;";
-
-                    text = currentLine.append("span")
-                                                .attr("class", "text_coloredword")
-                                                .datum({ topicID: p_data.json.lines_and_colors[index][1][index2],
-                                                         locolor: dlocolor,
-                                                         color:this.m_level.m_topicColors[p_data.json.lines_and_colors[index][1][index2]],
-                                                         word: tempTempWord })
-                                                .style("color", this.m_level.m_topicColors[p_data.json.lines_and_colors[index][1][index2]])
-                                                .style("font-family", namespace.Level.prototype.s_fontFamily)
-                                                .style("font-size", 22)
-                                                .style("opacity", 1.0)
-                                                .html(tempTempWord);
-
-                    currentX += text[0][0].offsetWidth * 0.66;
-
-                    if ( "a" == quotePlace ){
-
-                        text = currentLine.append("span")
-                                                    .attr("class", "text_word")
-                                                    .style("color", namespace.Level.prototype.s_palette.gold)
-                                                    .style("font-family", namespace.Level.prototype.s_fontFamily)
-                                                    .style("font-size", 22)
-                                                    .style("opacity", 1.0)
-                                                    .html(quoteType + "&nbsp;");
-
-                        currentX += text[0][0].offsetWidth * 0.66;
-                    }
-                }
-            }
-
-            currentY += dy;
-            if ( currentY > this.m_size.height ){
-                rectGrowth += dy;
-            }
-
-            // Append a break so the next line is drawn beneath
-            this.m_containerGroup.append("br");
-        }
-
-
-        // 6. Add mousover behavior for colored and non-colored words
-        this.m_div.selectAll(".text_coloredword")
-                  .attr("height", rectGrowth)
-                  .on(namespace.Interaction.click, function(d){
-                      this.MouseBehavior(d, namespace.Interaction.click);
-                      d3.event.stopPropagation();
-                  }.bind(this))
-                  .on(namespace.Interaction.mouseover, function(d){
-                      this.MouseBehavior(d, namespace.Interaction.mouseover);
-                  }.bind(this))
-                  .on(namespace.Interaction.mouseout, function(d){
-                      this.MouseBehavior(null, namespace.Interaction.mouseout);
-                  }.bind(this));
-
-        this.m_div.selectAll(".text_word")
-                  .on(namespace.Interaction.click, function(d){
-                      if ( -1 != this.m_level.m_highlightedTopic ){
-                          this.MouseBehavior(null, namespace.Interaction.click);
-                          d3.event.stopPropagation();
-                      }
-                  }.bind(this));*/
-
-
-        // 7. Force container div redraw (for datashapes scaling)
         var oldContainerDivDisplay = this.m_container.m_div.style("display");
         this.m_container.m_div.style("display", "none");
         this.m_container.m_div.style("display", oldContainerDivDisplay);
@@ -3779,32 +3640,23 @@ var TWiC = (function(namespace){
     });
 
     namespace.TextView.method("Load", function(){
-
-        //this.m_level.m_queue.defer(function(callback){
-
-            // Queue up loading of the text
-            d3.json(this.m_filename, function(error, data) {
-
                 // Save a reference to the JSON data
-                this.m_data = data.document;
+        this.m_data = this.m_level.m_docInfo.docs;
 
-                var textData = { json: this.m_data,
-                                 clusterIndex: 0,
-                                 topicID: 0,
-                                 color: this.m_level.m_topicColors[0] };
+        var textData = {
+            json: this.m_data,
+            clusterIndex: 0,
+            topicID: 0,
+            color: this.m_level.m_topicColors[0]
+        };
 
-                // Update the panel to present the new text
-                var initialPauseState = this.IsPaused();
-                this.Pause(false);
-                this.Update(textData, namespace.Interaction.click);
-                if ( initialPauseState ){
-                    this.Pause(true);
-                }
-
-                //callback(null, this.m_data);
-
-            }.bind(this));
-        //}.bind(this));
+        // Update the panel to present the new text
+        var initialPauseState = this.IsPaused();
+        this.Pause(false);
+        this.Update(textData, namespace.Interaction.click);
+        if (initialPauseState) {
+            this.Pause(true);
+        }
     });
 
     namespace.TextView.method("MouseBehavior", function(p_data, p_mouseEventType){
@@ -4530,7 +4382,7 @@ var TWiC = (function(namespace){
         // Hide all text
         this.m_svg.selectAll(TWiC.PublicationView.prototype.s_datashapeTextClassSelect)
                   .selectAll("tspan")
-                  .style("opacity", 0.0);
+                  .style("opacity", 0.5);
     });
 
     namespace.PublicationView.method("HighlightAllDataShapes", function(p_showText){
@@ -5350,7 +5202,7 @@ var TWiC = (function(namespace){
 
                         // Four possible data representations
                         // 1. Corpus Avg Bullseye
-                        if ( this.m_level.m_corpusMap["name"] == p_data.shapeRef.m_name ){
+                        if ( this.m_level.m_corpusInfo["name"] == p_data.shapeRef.m_name ){
 
                             panelTitle = p_data.shapeRef.m_name;
                         }
@@ -5363,7 +5215,7 @@ var TWiC = (function(namespace){
                             // -2 to reduce inflated distance set at CorpusClusterView.InitializeGraph()
                             //dist2avg = p_data.shapeRef.m_panel.m_objectsJSON[parseInt(p_data.shapeRef.m_title)].dist2avg;
                             dist2avg = myPanel.m_adjustedDistances[parseInt(p_data.shapeRef.m_title)] -
-                                       (( myPanel.b_adjustDistances ) ? myPanel.m_linkDistLimits.min : 0);
+                                       (( m5yPanel.b_adjustDistances ) ? myPanel.m_linkDistLimits.min : 0);
                             dist2avg = Math.abs(dist2avg);
                         }
                         // 3. Avg of Corpus Clusters Bullseye
@@ -5595,10 +5447,10 @@ var TWiC = (function(namespace){
 
     namespace.DataBar.method("DrawTopicTiles", function(p_currentY, p_data){
 
-        var topicsSorted = Object.keys(p_data.shapeRef.m_fullTopicListRef).sort(function(a, b) { return p_data.shapeRef.m_fullTopicListRef[a][1] - p_data.shapeRef.m_fullTopicListRef[b][1]; });
+        var topicsSorted = Object.keys(p_data.shapeRef.m_fullTopicListRef).sort(function(a, b) { return p_data.shapeRef.m_fullTopicListRef[a] - p_data.shapeRef.m_fullTopicListRef[b]; });
         var topicList = [];
         for ( var index = topicsSorted.length - 1; index >= 0; index-- ){
-            topicList.push([topicsSorted[index], p_data.shapeRef.m_fullTopicListRef[topicsSorted[index]][1]])
+            topicList.push([topicsSorted[index], p_data.shapeRef.m_fullTopicListRef[topicsSorted[index]]])
         }
 
         var proportionSum = 0;

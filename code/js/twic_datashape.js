@@ -65,20 +65,16 @@ var TWiC = (function(namespace){
         this.m_fullTopicListRef = p_topics;
         this.m_topTopics = [];
         this.m_topicProportionSum = 0;
-        for ( var index = 0; index < this.m_numberCircles; index++ ){
-            this.m_topTopics.push([]);
+
+        var topics = [];
+        var keys = Object.keys(p_topics);
+        for (var i = 0; i < keys.length; i++) {
+            topics.push([i, p_topics[keys[i]]]);
         }
+        var topicsSorted = topics.sort(function(a, b) { return b[1] - a[1]; });
+        this.m_topTopics = topicsSorted.slice(0,this.m_numberCircles);
+        this.m_topicProportionSum = topics.reduce(function(a, b) { return [0,a[1] + b[1]];}, [0,0])[1];
 
-        for ( index in p_topics ) {
-
-            for ( var index2 = 0; index2 < this.m_numberCircles; index2++ ){
-
-                if ( p_topics[index][0] == index2 + 1 ) {
-                    this.m_topTopics[index2] = [index, p_topics[index][1]];
-                }
-            }
-            this.m_topicProportionSum += p_topics[index][1];
-        }
 
         // Other class members
         this.m_allowDblclick = true;
@@ -93,7 +89,7 @@ var TWiC = (function(namespace){
         if ( this.m_isCorpusBullseye ){
 
             this.m_textCount = 0;
-            this.m_textCount = this.m_level.m_corpusMap['ndocs']
+            this.m_textCount = this.m_level.m_corpusInfo['ndocs'];
             // var corpusTopicCount = this.m_level.m_corpusInfo.corpus_info[1].length;
             // for ( var index = 0; index < corpusTopicCount; index++ ){
             //     this.m_textCount += this.m_level.m_corpusMap["children"][index]["children"].length;
@@ -621,12 +617,12 @@ var TWiC = (function(namespace){
         this.m_shapeChar = namespace.TopicRectangle.prototype.s_shapeChar;
         this.m_allowDblclick = true;
         this.m_docIndex = p_docIndex;
-        this.m_data = this.m_level.m_docInfo.docs[this.m_docIndex].text
+        this.m_data = this.m_level.m_docInfo.docs[this.m_docIndex];
 
         //Top topics of this document
         var p_topics = this.m_level.m_docInfo.docs[this.m_docIndex].topic;
         this.m_fullTopicListRef = p_topics;
-        this.m_topicProportionSum =  Object.keys(p_topics).reduce(function(a, b) { return p_topics[a] + p_topics[b]; }, 0);
+        this.m_topicProportionSum =  Object.values(p_topics).reduce(function(a, b) { return a + b; }, 0);
         this.m_numberRects = p_numberTopics;
         var topicsSorted = Object.keys(p_topics).sort(function(a, b) { return p_topics[a] - p_topics[b]; });
 
@@ -982,7 +978,7 @@ var TWiC = (function(namespace){
     // Static members of TopicRectangle
     namespace.TopicRectangle.prototype.MouseBehavior = function(p_rectangle, p_data, p_mouseEventType){
 
-        console.log("Topic Rectangle MouseBehavior");
+        // console.log("Topic Rectangle MouseBehavior");
 
         // Unhighlighted
         if ( -1 == p_rectangle.m_level.m_highlightedTopic ){
@@ -1048,32 +1044,21 @@ var TWiC = (function(namespace){
 
                     if ( p_rectangle.AllowInteractions(namespace.Interaction.dblclick) ){
 
-                        // See if the underlying panel is open yet, and if not update the level
-                        // (Level update will take care of updating linked views)
-                        if ( !p_rectangle.m_panel.IsUnderlyingPanelOpen() ){
+                        // Trigger the double-click behavior of any linked views
+                        for (var index = 0; index < p_rectangle.m_panel.m_linkedViews.length; index++) {
 
-                            var ci = ( undefined === p_rectangle.m_panel.m_clusterIndex ) ? p_rectangle.m_topTopics[0][0] : p_rectangle.m_panel.m_clusterIndex;
-                            p_rectangle.m_level.Update({ json: p_rectangle.m_data,
-                                                         clusterIndex: ci,
-                                                         topicID: p_data.topicID,
-                                                         color: p_rectangle.m_level.m_topicColors[p_data.topicID] },
-                                                       namespace.Interaction.dblclick);
-                        } else {
+                            if (namespace.Interaction.dblclick == p_rectangle.m_panel.m_linkedViews[index].update) {
 
-                            // Trigger the double-click behavior of any linked views
-                            for ( var index = 0; index < p_rectangle.m_panel.m_linkedViews.length; index++ ){
-
-                                if ( namespace.Interaction.dblclick == p_rectangle.m_panel.m_linkedViews[index].update ){
-
-                                    p_rectangle.m_panel.m_linkedViews[index].panel.Pause(false);
-                                    var ci = ( undefined === p_rectangle.m_panel.m_clusterIndex ) ? p_rectangle.m_topTopics[0][0] : p_rectangle.m_panel.m_clusterIndex;
-                                    p_rectangle.m_panel.m_linkedViews[index].panel.Update({ json: p_rectangle.m_data,
-                                                                                            clusterIndex: ci,
-                                                                                            topicID: p_data.topicID,
-                                                                                            color: p_rectangle.m_level.m_topicColors[p_data.topicID] },
-                                                                                          namespace.Interaction.dblclick);
-                                    p_rectangle.m_panel.m_linkedViews[index].panel.Pause(true);
-                                }
+                                p_rectangle.m_panel.m_linkedViews[index].panel.Pause(false);
+                                var ci = ( undefined === p_rectangle.m_panel.m_clusterIndex ) ? p_rectangle.m_topTopics[0][0] : p_rectangle.m_panel.m_clusterIndex;
+                                p_rectangle.m_panel.m_linkedViews[index].panel.Update({
+                                        json: p_rectangle.m_data,
+                                        clusterIndex: ci,
+                                        topicID: p_data.topicID,
+                                        color: p_rectangle.m_level.m_topicColors[p_data.topicID]
+                                    },
+                                    namespace.Interaction.dblclick);
+                                p_rectangle.m_panel.m_linkedViews[index].panel.Pause(true);
                             }
                         }
                     }
@@ -1163,56 +1148,23 @@ var TWiC = (function(namespace){
                                 break;
                             }
                         }
-
-                        /*if ( p_rectangle != p_rectangle.m_level.GetDataBar().GetCurrentShape() ){
-
-                            p_rectangle.m_panel.Pause(false);
-                            p_rectangle.m_panel.Update(null, namespace.Interaction.mouseover);
-                            p_rectangle.m_panel.Update(p_data, namespace.Interaction.mouseover);
-                            p_rectangle.m_panel.Pause(true);
-                            for ( var index = 0; index < p_rectangle.m_panel.m_linkedViews.length; index++ ){
-
-                                if ( namespace.Interaction.mouseover == p_rectangle.m_panel.m_linkedViews[index].update ){
-
-                                    p_rectangle.m_panel.m_linkedViews[index].panel.Pause(false);
-                                    p_rectangle.m_panel.m_linkedViews[index].panel.Update(null, namespace.Interaction.mouseover);
-                                    if ( p_rectangle.m_panel.m_linkedViews[index].panel instanceof namespace.DataBar ){
-                                        p_rectangle.m_panel.m_linkedViews[index].panel.Update({ shapeRef: p_rectangle }, namespace.Interaction.click);
-                                    }
-                                    p_rectangle.m_panel.m_linkedViews[index].panel.Update(p_data, namespace.Interaction.mouseover);
-                                }
-                                p_rectangle.m_panel.m_linkedViews[index].panel.Pause(true);
-                            }
-                        }*/
-
                         if ( p_rectangle.AllowInteractions(namespace.Interaction.dblclick) ){
 
-                            // See if the underlying panel is open yet, and if not update the level
-                            // (Level update will take care of updating linked views)
-                            if ( !p_rectangle.m_panel.IsUnderlyingPanelOpen() ){
+                            // Trigger the double-click behavior of any linked views
+                            for (var index = 0; index < p_rectangle.m_panel.m_linkedViews.length; index++) {
 
-                                var ci = ( undefined === p_rectangle.m_panel.m_clusterIndex ) ? p_rectangle.m_topTopics[0][0] : p_rectangle.m_panel.m_clusterIndex;
-                                p_rectangle.m_level.Update({ json: p_rectangle.m_data,
-                                                             clusterIndex: ci,
-                                                             topicID: p_rectangle.m_level.m_highlightedTopic,
-                                                             color: p_rectangle.m_level.m_topicColors[p_rectangle.m_level.m_highlightedTopic] },
-                                                           namespace.Interaction.dblclick);
-                            } else {
+                                if (namespace.Interaction.dblclick == p_rectangle.m_panel.m_linkedViews[index].update) {
 
-                                // Trigger the double-click behavior of any linked views
-                                for ( var index = 0; index < p_rectangle.m_panel.m_linkedViews.length; index++ ){
-
-                                    if ( namespace.Interaction.dblclick == p_rectangle.m_panel.m_linkedViews[index].update ){
-
-                                        p_rectangle.m_panel.m_linkedViews[index].panel.Pause(false);
-                                        var ci = ( undefined === p_rectangle.m_panel.m_clusterIndex ) ? p_rectangle.m_topTopics[0][0] : p_rectangle.m_panel.m_clusterIndex;
-                                        p_rectangle.m_panel.m_linkedViews[index].panel.Update({ json: p_rectangle.m_data,
-                                                                                                clusterIndex: ci,
-                                                                                                topicID: p_rectangle.m_level.m_highlightedTopic,
-                                                                                                color: p_rectangle.m_level.m_topicColors[p_rectangle.m_level.m_highlightedTopic] },
-                                                                                              namespace.Interaction.dblclick);
-                                        p_rectangle.m_panel.m_linkedViews[index].panel.Pause(true);
-                                    }
+                                    p_rectangle.m_panel.m_linkedViews[index].panel.Pause(false);
+                                    var ci = ( undefined === p_rectangle.m_panel.m_clusterIndex ) ? p_rectangle.m_topTopics[0][0] : p_rectangle.m_panel.m_clusterIndex;
+                                    p_rectangle.m_panel.m_linkedViews[index].panel.Update({
+                                            json: p_rectangle.m_data,
+                                            clusterIndex: ci,
+                                            topicID: p_rectangle.m_level.m_highlightedTopic,
+                                            color: p_rectangle.m_level.m_topicColors[p_rectangle.m_level.m_highlightedTopic]
+                                        },
+                                        namespace.Interaction.dblclick);
+                                    p_rectangle.m_panel.m_linkedViews[index].panel.Pause(true);
                                 }
                             }
                         }
@@ -1278,31 +1230,20 @@ var TWiC = (function(namespace){
                         }
 
                         if ( p_rectangle.AllowInteractions(namespace.Interaction.dblclick) ){
+                            // Trigger the double-click behavior of any linked views
+                            for (var index = 0; index < p_rectangle.m_panel.m_linkedViews.length; index++) {
 
-                            // See if the underlying panel is open yet, and if not update the level
-                            // (Level update will take care of updating linked views)
-                            if ( !p_rectangle.m_panel.IsUnderlyingPanelOpen() ){
+                                if (namespace.Interaction.dblclick == p_rectangle.m_panel.m_linkedViews[index].update) {
 
-                                var ci = ( undefined === p_rectangle.m_panel.m_clusterIndex ) ? p_rectangle.m_topTopics[0][0] : p_rectangle.m_panel.m_clusterIndex;
-                                p_rectangle.m_level.Update({ json: p_rectangle.m_data,
-                                                             clusterIndex: ci,
-                                                             topicID: p_data.topicID },
-                                                           namespace.Interaction.dblclick);
-                            } else {
-
-                                // Trigger the double-click behavior of any linked views
-                                for ( var index = 0; index < p_rectangle.m_panel.m_linkedViews.length; index++ ){
-
-                                    if ( namespace.Interaction.dblclick == p_rectangle.m_panel.m_linkedViews[index].update ){
-
-                                        p_rectangle.m_panel.m_linkedViews[index].panel.Pause(false);
-                                        var ci = ( undefined === p_rectangle.m_panel.m_clusterIndex ) ? p_rectangle.m_topTopics[0][0] : p_rectangle.m_panel.m_clusterIndex;
-                                        p_rectangle.m_panel.m_linkedViews[index].panel.Update({ json: p_rectangle.m_data,
-                                                                                                clusterIndex: ci,
-                                                                                                topicID: p_data.topicID },
-                                                                                              namespace.Interaction.dblclick);
-                                        p_rectangle.m_panel.m_linkedViews[index].panel.Pause(true);
-                                    }
+                                    p_rectangle.m_panel.m_linkedViews[index].panel.Pause(false);
+                                    var ci = ( undefined === p_rectangle.m_panel.m_clusterIndex ) ? p_rectangle.m_topTopics[0][0] : p_rectangle.m_panel.m_clusterIndex;
+                                    p_rectangle.m_panel.m_linkedViews[index].panel.Update({
+                                            json: p_rectangle.m_data,
+                                            clusterIndex: ci,
+                                            topicID: p_data.topicID
+                                        },
+                                        namespace.Interaction.dblclick);
+                                    p_rectangle.m_panel.m_linkedViews[index].panel.Pause(true);
                                 }
                             }
                         }
@@ -1368,7 +1309,8 @@ var TWiC = (function(namespace){
         var dy = namespace.TopicBar.prototype.s_textInfo.yIncrement;
 
         // Some calculations for extended div height for texts larger than the current panel size
-        for ( var index = 0; index < this.m_data.json.line_count; index++ ){
+        var lines = 1;
+        for ( var index = 0; index < lines; index++ ){
             currentY += dy;
             if ( currentY > this.m_panel.m_size.height ){
                 rectGrowth += dy;
@@ -1376,21 +1318,13 @@ var TWiC = (function(namespace){
         }
 
         // Append the full text as a foreignObject (data for topic words to be added on the fly by TextView)
-        var foreignObject = p_node.append("foreignObject")
+        var foreignObject = p_node.append("tspan")
+                                  .style("font-family", namespace.Level.prototype.s_fontFamily)
+                                  .style("font-size", 20)
+                                  .style("color","blanchedalmond")
                                   .attr("width", this.m_size.width)
-                                  .attr("height", rectGrowth);
-        /*foreignObject.append("xhtml:head")
-                     .append("link")
-                     .attr("rel", "stylesheet")
-                     .attr("type", "text/css")
-                     .attr("href", "css/twic.css");
-        foreignObject.append("link")
-                     .attr("rel", "stylesheet")
-                     .attr("type", "text/css")
-                     .attr("href", "http://fonts.googleapis.com/css?family=Podkova:400|Inconsolata:400,700");*/
-        foreignObject.append("xhtml:body")
-                     .style("background-color", namespace.Level.prototype.s_palette.darkblue)
-                     .html(this.m_data.json.full_text);
+                                  .attr("height", rectGrowth)
+                                  .html(this.m_data.json.text);
 
         // Add mousover behavior for colored and non-colored words
         this.m_panel.m_div
@@ -1848,13 +1782,8 @@ var TWiC = (function(namespace){
 
         // Information about this topic
         this.m_topicID = p_topicID;
-        for ( topicID in this.m_dataShape.m_fullTopicListRef ){
-            if ( this.m_topicID == topicID ){
-                this.m_topicProportion = this.m_dataShape.m_fullTopicListRef[topicID][1];
-            }
-        }
 
-        this.m_topicProportion /= p_dataShape.m_topicProportionSum;
+        this.m_topicProportion = this.m_dataShape.m_fullTopicListRef[this.m_topicID] / p_dataShape.m_topicProportionSum;
         this.m_topicColor = this.m_level.m_topicColors[this.m_topicID];
         this.m_topicWords = this.m_level.m_topicWordLists[this.m_topicID];
     };

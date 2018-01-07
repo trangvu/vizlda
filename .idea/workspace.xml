@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/code/js/twic_level.js" line="847" />
+    <bookmark url="file://$PROJECT_DIR$/code/js/twic_level.js" line="535" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0fcd6610-bcc0-4c64-b325-fe2b06024747" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/js/search.js" afterPath="$PROJECT_DIR$/code/js/search.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/js/twic_data.js" afterPath="$PROJECT_DIR$/code/js/twic_data.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/js/twic_datashape.js" afterPath="$PROJECT_DIR$/code/js/twic_datashape.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/js/twic_level.js" afterPath="$PROJECT_DIR$/code/js/twic_level.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/js/twic_panel.js" afterPath="$PROJECT_DIR$/code/js/twic_panel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/input/json/obesity_doc_info.json" afterPath="$PROJECT_DIR$/data/input/json/obesity_doc_info.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/input/json/obesity_corpus_info.json" afterPath="$PROJECT_DIR$/data/input/json/obesity_corpus_info.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/obesity.html" afterPath="$PROJECT_DIR$/obesity.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -34,8 +35,8 @@
       <file leaf-file-name="obesity.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/obesity.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="176" column="62" lean-forward="false" selection-start-line="176" selection-start-column="62" selection-end-line="176" selection-end-column="62" />
+            <state relative-caret-position="75">
+              <caret line="77" column="14" lean-forward="true" selection-start-line="77" selection-start-column="14" selection-end-line="77" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -44,8 +45,8 @@
       <file leaf-file-name="twic_data.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/js/twic_data.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="39" column="40" lean-forward="true" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
+            <state relative-caret-position="405">
+              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -54,8 +55,8 @@
       <file leaf-file-name="twic_panel.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/js/twic_panel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="4635" column="51" lean-forward="false" selection-start-line="4635" selection-start-column="51" selection-end-line="4635" selection-end-column="51" />
+            <state relative-caret-position="560">
+              <caret line="1707" column="81" lean-forward="true" selection-start-line="1707" selection-start-column="81" selection-end-line="1707" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -64,8 +65,8 @@
       <file leaf-file-name="twic_control.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/js/twic_control.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="330">
+              <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -74,28 +75,8 @@
       <file leaf-file-name="obesity_doc_info.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/input/json/obesity_doc_info.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="11" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="twic.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/twic.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="twic_level.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/js/twic_level.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-322">
-              <caret line="202" column="78" lean-forward="true" selection-start-line="202" selection-start-column="78" selection-end-line="202" selection-end-column="78" />
+            <state relative-caret-position="240">
+              <caret line="0" column="3441" lean-forward="false" selection-start-line="0" selection-start-column="3441" selection-end-line="0" selection-end-column="3441" />
               <folding />
             </state>
           </provider>
@@ -104,21 +85,49 @@
       <file leaf-file-name="twic_datashape.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/js/twic_datashape.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="644" column="42" lean-forward="false" selection-start-line="644" selection-start-column="30" selection-end-line="644" selection-end-column="42" />
+            <state relative-caret-position="185">
+              <caret line="655" column="13" lean-forward="false" selection-start-line="655" selection-start-column="13" selection-end-line="655" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="search.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/js/search.js">
+      <file leaf-file-name="twic_level.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/js/twic_level.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#40#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="-86">
+              <caret line="469" column="50" lean-forward="true" selection-start-line="469" selection-start-column="50" selection-end-line="469" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="obesity_corpus_info.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/input/json/obesity_corpus_info.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="645">
+              <caret line="0" column="9124" lean-forward="false" selection-start-line="0" selection-start-column="9124" selection-end-line="0" selection-end-column="9124" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tmn_corpus_map.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/input/json/tmn_corpus_map.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="0" column="1718" lean-forward="true" selection-start-line="0" selection-start-column="1718" selection-end-line="0" selection-end-column="1718" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tmn_doc.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tmn_doc.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="675">
+              <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -136,25 +145,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>div_twic_level</find>
-      <find>container</find>
-      <find>&quot;div_twic_container</find>
-      <find>div_twic_container</find>
-      <find>Packery</find>
-      <find>namespace.Data</find>
-      <find>Update</find>
-      <find>s_json</find>
-      <find>JSON</find>
-      <find>preblen</find>
-      <find>SetJSO</find>
-      <find>m_queue</find>
-      <find>packery</find>
-      <find>Start</find>
-      <find>boots</find>
-      <find>Bulleseye</find>
-      <find>OpenUnderlyingPanel</find>
-      <find>CorpusClusterView</find>
-      <find>738</find>
       <find>defaultFont</find>
       <find>PublicationView.method(&quot;Load&quot;</find>
       <find>TWiC</find>
@@ -165,7 +155,26 @@
       <find>onClick</find>
       <find>.on(</find>
       <find>d3.event</find>
+      <find>m_filename</find>
+      <find>SetText</find>
+      <find>OpenUnderlyingPanel</find>
       <find>AddText</find>
+      <find>LoadURL</find>
+      <find>TextView</find>
+      <find>TopicText</find>
+      <find>723</find>
+      <find>m_corpusMap</find>
+      <find>ndoc</find>
+      <find>lamda</find>
+      <find>lambda</find>
+      <find>reduce</find>
+      <find>namespace.TopicRectangle.prototype.MouseBehavior(this, d, namespace.Interaction.dblclick);</find>
+      <find>new TopicRectangle</find>
+      <find>p_rectangle.m_panel.m_linkedViews[index].panel.Update</find>
+      <find>publication_shape_text</find>
+      <find>s_datashapeTextClassName</find>
+      <find>m_textTag</find>
+      <find>DarkenAllDataShapes</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -183,15 +192,15 @@
         <option value="$PROJECT_DIR$/ws-topics.html" />
         <option value="$PROJECT_DIR$/css/twic.css" />
         <option value="$PROJECT_DIR$/tmn-topics.html" />
-        <option value="$PROJECT_DIR$/data/input/json/obesity_corpus_info.json" />
-        <option value="$PROJECT_DIR$/code/js/twic_datashape.js" />
         <option value="$PROJECT_DIR$/data/input/json/obesity_meta_info.json" />
-        <option value="$PROJECT_DIR$/code/js/twic_data.js" />
         <option value="$PROJECT_DIR$/code/js/twic_search.js" />
-        <option value="$PROJECT_DIR$/obesity.html" />
         <option value="$PROJECT_DIR$/code/js/search.js" />
         <option value="$PROJECT_DIR$/data/input/json/obesity_doc_info.json" />
+        <option value="$PROJECT_DIR$/obesity.html" />
+        <option value="$PROJECT_DIR$/code/js/twic_data.js" />
+        <option value="$PROJECT_DIR$/data/input/json/obesity_corpus_info.json" />
         <option value="$PROJECT_DIR$/code/js/twic_level.js" />
+        <option value="$PROJECT_DIR$/code/js/twic_datashape.js" />
         <option value="$PROJECT_DIR$/code/js/twic_panel.js" />
       </list>
     </option>
@@ -222,7 +231,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -324,6 +332,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -431,21 +440,22 @@
       <workItem from="1514848110031" duration="14069000" />
       <workItem from="1514863658767" duration="1190000" />
       <workItem from="1514941141838" duration="7635000" />
-      <workItem from="1515193162279" duration="37554000" />
+      <workItem from="1515193162279" duration="41462000" />
+      <workItem from="1515314592824" duration="13038000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93680000" />
+    <option name="totallyTimeSpent" value="110626000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1020" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16904384" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1711569" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48549107" sideWeight="0.50416666" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4844649" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31990793" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -456,7 +466,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973205" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -469,9 +479,9 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16904384" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4844649" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17148982" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973205" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4844649" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -491,32 +501,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/code/js/twic_panel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68355">
-          <caret line="4557" column="0" lean-forward="false" selection-start-line="4557" selection-start-column="0" selection-end-line="4557" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/jquery-ui.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81420">
-          <caret line="5428" column="68" lean-forward="false" selection-start-line="5428" selection-start-column="68" selection-end-line="5428" selection-end-column="68" />
-          <folding>
-            <marker date="1512551501660" expanded="true" signature="37294:37365" ph="..." />
-            <marker date="1512551501660" expanded="true" signature="37379:37403" ph="..." />
-            <marker date="1512551501660" expanded="true" signature="147070:147114" ph="..." />
-            <marker date="1512551501660" expanded="true" signature="211295:211301" ph="..." />
-            <marker date="1512551501660" expanded="true" signature="269981:269998" ph="..." />
-            <marker date="1512551501660" expanded="true" signature="288041:288057" ph="..." />
-            <marker date="1512551501660" expanded="true" signature="502370:502376" ph="..." />
-            <marker date="1512551501660" expanded="true" signature="532777:532784" ph="..." />
-            <marker date="1512551501660" expanded="true" signature="532962:532969" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/js/twic_control.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1770">
@@ -603,13 +587,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/js/twic.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="94" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="5" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/code/js/twic.js" />
     <entry file="file://$PROJECT_DIR$/twic.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -628,13 +606,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/input/json/tmn_corpus_info.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="0" column="2875" lean-forward="true" selection-start-line="0" selection-start-column="2875" selection-end-line="0" selection-end-column="2875" />
         </state>
       </provider>
     </entry>
@@ -726,32 +697,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/js/twic_publication_test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="47" lean-forward="false" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmn_doc.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1485">
-          <caret line="99" column="13" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="99" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/code/js/twic_publication_test.js" />
     <entry file="file://$PROJECT_DIR$/lib/bootstrap.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="5" column="2352" lean-forward="false" selection-start-line="5" selection-start-column="2352" selection-end-line="5" selection-end-column="2360" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -761,17 +716,9 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/input/json/obesity_corpus_info.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="0" column="17761" lean-forward="false" selection-start-line="0" selection-start-column="17761" selection-end-line="0" selection-end-column="17761" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/twic.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
+        <state relative-caret-position="2055">
           <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
           <folding />
         </state>
@@ -798,321 +745,345 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/input/json/text/0.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="0" column="543" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="543" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data/input/json/text/0.json" />
     <entry file="file://$PROJECT_DIR$/ws-topics.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="88" lean-forward="true" selection-start-line="6" selection-start-column="88" selection-end-line="6" selection-end-column="88" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#5966#5972#1" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h1#0;n#div#1;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#7927#7931#0" expanded="true" />
-            <element signature="e#7941#7947#0" expanded="true" />
-            <element signature="e#7956#7962#0" expanded="true" />
-            <element signature="e#7962#7966#0" expanded="true" />
-            <element signature="e#7968#7972#0" expanded="true" />
-            <element signature="e#7982#7988#0" expanded="true" />
-            <element signature="e#7991#7997#0" expanded="true" />
-            <element signature="e#7997#8001#0" expanded="true" />
-            <element signature="e#8004#8008#0" expanded="true" />
-            <element signature="e#8018#8024#0" expanded="true" />
-            <element signature="e#8033#8039#0" expanded="true" />
-            <element signature="e#8039#8043#0" expanded="true" />
-            <element signature="e#8056#8060#0" expanded="true" />
-            <element signature="e#8070#8076#0" expanded="true" />
-            <element signature="e#8087#8093#0" expanded="true" />
-            <element signature="e#8097#8103#0" expanded="true" />
-            <element signature="e#8113#8119#0" expanded="true" />
-            <element signature="e#8119#8123#0" expanded="true" />
-            <element signature="e#8140#8144#0" expanded="true" />
-            <element signature="e#8155#8161#0" expanded="true" />
-            <element signature="e#8165#8171#0" expanded="true" />
-            <element signature="e#8178#8184#0" expanded="true" />
-            <element signature="e#8196#8202#0" expanded="true" />
-            <element signature="e#8215#8221#0" expanded="true" />
-            <element signature="e#8240#8246#0" expanded="true" />
-            <element signature="e#8246#8250#0" expanded="true" />
-            <element signature="e#8267#8271#0" expanded="true" />
-            <element signature="e#8281#8287#0" expanded="true" />
-            <element signature="e#8302#8308#0" expanded="true" />
-            <element signature="e#8308#8312#0" expanded="true" />
-            <element signature="e#8333#8337#0" expanded="true" />
-            <element signature="e#8347#8353#0" expanded="true" />
-            <element signature="e#8362#8368#0" expanded="true" />
-            <element signature="e#8374#8380#0" expanded="true" />
-            <element signature="e#8385#8391#0" expanded="true" />
-            <element signature="e#8391#8395#0" expanded="true" />
-            <element signature="e#8420#8424#0" expanded="true" />
-            <element signature="e#8434#8440#0" expanded="true" />
-            <element signature="e#8460#8466#0" expanded="true" />
-            <element signature="e#8466#8470#0" expanded="true" />
-            <element signature="e#8499#8503#0" expanded="true" />
-            <element signature="e#8515#8521#0" expanded="true" />
-            <element signature="e#8527#8533#0" expanded="true" />
-            <element signature="e#8540#8546#0" expanded="true" />
-            <element signature="e#8577#8583#0" expanded="true" />
-            <element signature="e#8596#8602#0" expanded="true" />
-            <element signature="e#8610#8616#0" expanded="true" />
-            <element signature="e#8631#8637#0" expanded="true" />
-            <element signature="e#8642#8648#0" expanded="true" />
-            <element signature="e#8648#8652#0" expanded="true" />
-            <element signature="e#8652#8656#0" expanded="true" />
-            <element signature="e#8667#8673#0" expanded="true" />
-            <element signature="e#8678#8684#0" expanded="true" />
-            <element signature="e#8684#8688#0" expanded="true" />
-            <element signature="e#8688#8692#0" expanded="true" />
-            <element signature="e#8697#8701#0" expanded="true" />
-            <element signature="e#8701#8705#0" expanded="true" />
-            <element signature="e#8712#8716#0" expanded="true" />
-            <element signature="e#8745#8749#0" expanded="true" />
-            <element signature="e#8759#8765#0" expanded="true" />
-            <element signature="e#8798#8804#0" expanded="true" />
-            <element signature="e#8810#8816#0" expanded="true" />
-            <element signature="e#8820#8826#0" expanded="true" />
-            <element signature="e#8826#8830#0" expanded="true" />
-            <element signature="e#8863#8867#0" expanded="true" />
-            <element signature="e#8878#8884#0" expanded="true" />
-            <element signature="e#8899#8905#0" expanded="true" />
-            <element signature="e#8911#8917#0" expanded="true" />
-            <element signature="e#8921#8927#0" expanded="true" />
-            <element signature="e#8927#8931#0" expanded="true" />
-            <element signature="e#8966#8970#0" expanded="true" />
-            <element signature="e#8980#8986#0" expanded="true" />
-            <element signature="e#8996#9002#0" expanded="true" />
-            <element signature="e#9002#9006#0" expanded="true" />
-            <element signature="e#9043#9047#0" expanded="true" />
-            <element signature="e#9057#9063#0" expanded="true" />
-            <element signature="e#9069#9075#0" expanded="true" />
-            <element signature="e#9075#9079#0" expanded="true" />
-            <element signature="e#9088#9092#0" expanded="true" />
-            <element signature="e#9098#9102#0" expanded="true" />
-            <element signature="e#9139#9143#0" expanded="true" />
-            <element signature="e#9156#9162#0" expanded="true" />
-            <element signature="e#9174#9180#0" expanded="true" />
-            <element signature="e#9180#9184#0" expanded="true" />
-            <element signature="e#9225#9229#0" expanded="true" />
-            <element signature="e#9242#9248#0" expanded="true" />
-            <element signature="e#9249#9255#0" expanded="true" />
-            <element signature="e#9265#9271#0" expanded="true" />
-            <element signature="e#9271#9277#0" expanded="true" />
-            <element signature="e#9277#9281#0" expanded="true" />
-            <element signature="e#9334#9338#0" expanded="true" />
-            <element signature="e#9351#9357#0" expanded="true" />
-            <element signature="e#9358#9364#0" expanded="true" />
-            <element signature="e#9364#9368#0" expanded="true" />
-            <element signature="e#9417#9421#0" expanded="true" />
-            <element signature="e#9434#9440#0" expanded="true" />
-            <element signature="e#9441#9447#0" expanded="true" />
-            <element signature="e#9447#9451#0" expanded="true" />
-            <element signature="e#9504#9508#0" expanded="true" />
-            <element signature="e#9521#9527#0" expanded="true" />
-            <element signature="e#9528#9534#0" expanded="true" />
-            <element signature="e#9534#9538#0" expanded="true" />
-            <element signature="e#9588#9592#0" expanded="true" />
-            <element signature="e#9605#9611#0" expanded="true" />
-            <element signature="e#9612#9618#0" expanded="true" />
-            <element signature="e#9618#9622#0" expanded="true" />
-            <element signature="e#9673#9677#0" expanded="true" />
-            <element signature="e#9684#9688#0" expanded="true" />
-            <element signature="e#9723#9727#0" expanded="true" />
-            <element signature="e#9731#9735#0" expanded="true" />
-            <element signature="e#9770#9774#0" expanded="true" />
-            <element signature="e#9784#9790#0" expanded="true" />
-            <element signature="e#9800#9806#0" expanded="true" />
-            <element signature="e#9806#9810#0" expanded="true" />
-            <element signature="e#9847#9851#0" expanded="true" />
-            <element signature="e#9861#9867#0" expanded="true" />
-            <element signature="e#9874#9880#0" expanded="true" />
-            <element signature="e#9880#9884#0" expanded="true" />
-            <element signature="e#9890#9894#0" expanded="true" />
-            <element signature="e#9900#9904#0" expanded="true" />
-            <element signature="e#9941#9945#0" expanded="true" />
-            <element signature="e#9957#9963#0" expanded="true" />
-            <element signature="e#9975#9981#0" expanded="true" />
-            <element signature="e#9987#9993#0" expanded="true" />
-            <element signature="e#9997#10003#0" expanded="true" />
-            <element signature="e#10003#10007#0" expanded="true" />
-            <element signature="e#10042#10046#0" expanded="true" />
-            <element signature="e#10050#10054#0" expanded="true" />
-            <element signature="e#10089#10093#0" expanded="true" />
-            <element signature="e#10103#10109#0" expanded="true" />
-            <element signature="e#10119#10125#0" expanded="true" />
-            <element signature="e#10125#10129#0" expanded="true" />
-            <element signature="e#10166#10170#0" expanded="true" />
-            <element signature="e#10180#10186#0" expanded="true" />
-            <element signature="e#10193#10199#0" expanded="true" />
-            <element signature="e#10199#10203#0" expanded="true" />
-            <element signature="e#10221#10225#0" expanded="true" />
-            <element signature="e#10231#10235#0" expanded="true" />
-            <element signature="e#10272#10276#0" expanded="true" />
-            <element signature="e#10288#10294#0" expanded="true" />
-            <element signature="e#10306#10312#0" expanded="true" />
-            <element signature="e#10318#10324#0" expanded="true" />
-            <element signature="e#10328#10334#0" expanded="true" />
-            <element signature="e#10334#10338#0" expanded="true" />
-            <element signature="e#10373#10377#0" expanded="true" />
-            <element signature="e#10381#10385#0" expanded="true" />
-            <element signature="e#10420#10424#0" expanded="true" />
-            <element signature="e#10436#10442#0" expanded="true" />
-            <element signature="e#10448#10454#0" expanded="true" />
-            <element signature="e#10461#10467#0" expanded="true" />
-            <element signature="e#10482#10488#0" expanded="true" />
-            <element signature="e#10488#10492#0" expanded="true" />
-            <element signature="e#10492#10496#0" expanded="true" />
-            <element signature="e#10507#10513#0" expanded="true" />
-            <element signature="e#10539#10545#0" expanded="true" />
-            <element signature="e#10558#10564#0" expanded="true" />
-            <element signature="e#10568#10574#0" expanded="true" />
-            <element signature="e#10574#10578#0" expanded="true" />
-            <element signature="e#10578#10582#0" expanded="true" />
-            <element signature="e#10587#10591#0" expanded="true" />
-            <element signature="e#10591#10595#0" expanded="true" />
-            <element signature="e#10602#10606#0" expanded="true" />
-            <element signature="e#10639#10643#0" expanded="true" />
-            <element signature="e#10648#10652#0" expanded="true" />
-            <element signature="e#10681#10685#0" expanded="true" />
-            <element signature="e#10689#10693#0" expanded="true" />
-            <element signature="e#10718#10722#0" expanded="true" />
-            <element signature="e#10726#10730#0" expanded="true" />
-            <element signature="e#10755#10759#0" expanded="true" />
-            <element signature="e#10771#10777#0" expanded="true" />
-            <element signature="e#10783#10789#0" expanded="true" />
-            <element signature="e#10796#10802#0" expanded="true" />
-            <element signature="e#10817#10823#0" expanded="true" />
-            <element signature="e#10823#10827#0" expanded="true" />
-            <element signature="e#10827#10831#0" expanded="true" />
-            <element signature="e#10842#10848#0" expanded="true" />
-            <element signature="e#10874#10880#0" expanded="true" />
-            <element signature="e#10893#10899#0" expanded="true" />
-            <element signature="e#10903#10909#0" expanded="true" />
-            <element signature="e#10909#10913#0" expanded="true" />
-            <element signature="e#10913#10917#0" expanded="true" />
-            <element signature="e#10922#10926#0" expanded="true" />
-            <element signature="e#10926#10930#0" expanded="true" />
-            <element signature="e#10937#10941#0" expanded="true" />
-            <element signature="e#10962#10966#0" expanded="true" />
-            <element signature="e#10970#10974#0" expanded="true" />
-            <element signature="e#10991#10995#0" expanded="true" />
-            <element signature="e#10999#11003#0" expanded="true" />
-            <element signature="e#11016#11020#0" expanded="true" />
-            <element signature="e#11024#11028#0" expanded="true" />
-            <element signature="e#11039#11043#0" expanded="true" />
-            <element signature="e#11047#11051#0" expanded="true" />
-            <element signature="e#11060#11064#0" expanded="true" />
-            <element signature="e#11068#11072#0" expanded="true" />
-            <element signature="e#11074#11078#0" expanded="true" />
-            <element signature="e#11082#11086#0" expanded="true" />
-            <element signature="e#11089#11093#0" expanded="true" />
-            <element signature="e#11105#11111#0" expanded="true" />
-            <element signature="e#11126#11132#0" expanded="true" />
-            <element signature="e#11132#11136#0" expanded="true" />
-            <element signature="e#11139#11143#0" expanded="true" />
-            <element signature="e#11150#11154#0" expanded="true" />
-            <element signature="e#11801#11807#0" expanded="true" />
-            <element signature="e#11813#11819#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="e#5966#5972#1" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#h1#0;n#div#1;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="e#7927#7931#0" expanded="false" />
+            <element signature="e#7941#7947#0" expanded="false" />
+            <element signature="e#7956#7962#0" expanded="false" />
+            <element signature="e#7962#7966#0" expanded="false" />
+            <element signature="e#7968#7972#0" expanded="false" />
+            <element signature="e#7982#7988#0" expanded="false" />
+            <element signature="e#7991#7997#0" expanded="false" />
+            <element signature="e#7997#8001#0" expanded="false" />
+            <element signature="e#8004#8008#0" expanded="false" />
+            <element signature="e#8018#8024#0" expanded="false" />
+            <element signature="e#8033#8039#0" expanded="false" />
+            <element signature="e#8039#8043#0" expanded="false" />
+            <element signature="e#8056#8060#0" expanded="false" />
+            <element signature="e#8070#8076#0" expanded="false" />
+            <element signature="e#8087#8093#0" expanded="false" />
+            <element signature="e#8097#8103#0" expanded="false" />
+            <element signature="e#8113#8119#0" expanded="false" />
+            <element signature="e#8119#8123#0" expanded="false" />
+            <element signature="e#8140#8144#0" expanded="false" />
+            <element signature="e#8155#8161#0" expanded="false" />
+            <element signature="e#8165#8171#0" expanded="false" />
+            <element signature="e#8178#8184#0" expanded="false" />
+            <element signature="e#8196#8202#0" expanded="false" />
+            <element signature="e#8215#8221#0" expanded="false" />
+            <element signature="e#8240#8246#0" expanded="false" />
+            <element signature="e#8246#8250#0" expanded="false" />
+            <element signature="e#8267#8271#0" expanded="false" />
+            <element signature="e#8281#8287#0" expanded="false" />
+            <element signature="e#8302#8308#0" expanded="false" />
+            <element signature="e#8308#8312#0" expanded="false" />
+            <element signature="e#8333#8337#0" expanded="false" />
+            <element signature="e#8347#8353#0" expanded="false" />
+            <element signature="e#8362#8368#0" expanded="false" />
+            <element signature="e#8374#8380#0" expanded="false" />
+            <element signature="e#8385#8391#0" expanded="false" />
+            <element signature="e#8391#8395#0" expanded="false" />
+            <element signature="e#8420#8424#0" expanded="false" />
+            <element signature="e#8434#8440#0" expanded="false" />
+            <element signature="e#8460#8466#0" expanded="false" />
+            <element signature="e#8466#8470#0" expanded="false" />
+            <element signature="e#8499#8503#0" expanded="false" />
+            <element signature="e#8515#8521#0" expanded="false" />
+            <element signature="e#8527#8533#0" expanded="false" />
+            <element signature="e#8540#8546#0" expanded="false" />
+            <element signature="e#8577#8583#0" expanded="false" />
+            <element signature="e#8596#8602#0" expanded="false" />
+            <element signature="e#8610#8616#0" expanded="false" />
+            <element signature="e#8631#8637#0" expanded="false" />
+            <element signature="e#8642#8648#0" expanded="false" />
+            <element signature="e#8648#8652#0" expanded="false" />
+            <element signature="e#8652#8656#0" expanded="false" />
+            <element signature="e#8667#8673#0" expanded="false" />
+            <element signature="e#8678#8684#0" expanded="false" />
+            <element signature="e#8684#8688#0" expanded="false" />
+            <element signature="e#8688#8692#0" expanded="false" />
+            <element signature="e#8697#8701#0" expanded="false" />
+            <element signature="e#8701#8705#0" expanded="false" />
+            <element signature="e#8712#8716#0" expanded="false" />
+            <element signature="e#8745#8749#0" expanded="false" />
+            <element signature="e#8759#8765#0" expanded="false" />
+            <element signature="e#8798#8804#0" expanded="false" />
+            <element signature="e#8810#8816#0" expanded="false" />
+            <element signature="e#8820#8826#0" expanded="false" />
+            <element signature="e#8826#8830#0" expanded="false" />
+            <element signature="e#8863#8867#0" expanded="false" />
+            <element signature="e#8878#8884#0" expanded="false" />
+            <element signature="e#8899#8905#0" expanded="false" />
+            <element signature="e#8911#8917#0" expanded="false" />
+            <element signature="e#8921#8927#0" expanded="false" />
+            <element signature="e#8927#8931#0" expanded="false" />
+            <element signature="e#8966#8970#0" expanded="false" />
+            <element signature="e#8980#8986#0" expanded="false" />
+            <element signature="e#8996#9002#0" expanded="false" />
+            <element signature="e#9002#9006#0" expanded="false" />
+            <element signature="e#9043#9047#0" expanded="false" />
+            <element signature="e#9057#9063#0" expanded="false" />
+            <element signature="e#9069#9075#0" expanded="false" />
+            <element signature="e#9075#9079#0" expanded="false" />
+            <element signature="e#9088#9092#0" expanded="false" />
+            <element signature="e#9098#9102#0" expanded="false" />
+            <element signature="e#9139#9143#0" expanded="false" />
+            <element signature="e#9156#9162#0" expanded="false" />
+            <element signature="e#9174#9180#0" expanded="false" />
+            <element signature="e#9180#9184#0" expanded="false" />
+            <element signature="e#9225#9229#0" expanded="false" />
+            <element signature="e#9242#9248#0" expanded="false" />
+            <element signature="e#9249#9255#0" expanded="false" />
+            <element signature="e#9265#9271#0" expanded="false" />
+            <element signature="e#9271#9277#0" expanded="false" />
+            <element signature="e#9277#9281#0" expanded="false" />
+            <element signature="e#9334#9338#0" expanded="false" />
+            <element signature="e#9351#9357#0" expanded="false" />
+            <element signature="e#9358#9364#0" expanded="false" />
+            <element signature="e#9364#9368#0" expanded="false" />
+            <element signature="e#9417#9421#0" expanded="false" />
+            <element signature="e#9434#9440#0" expanded="false" />
+            <element signature="e#9441#9447#0" expanded="false" />
+            <element signature="e#9447#9451#0" expanded="false" />
+            <element signature="e#9504#9508#0" expanded="false" />
+            <element signature="e#9521#9527#0" expanded="false" />
+            <element signature="e#9528#9534#0" expanded="false" />
+            <element signature="e#9534#9538#0" expanded="false" />
+            <element signature="e#9588#9592#0" expanded="false" />
+            <element signature="e#9605#9611#0" expanded="false" />
+            <element signature="e#9612#9618#0" expanded="false" />
+            <element signature="e#9618#9622#0" expanded="false" />
+            <element signature="e#9673#9677#0" expanded="false" />
+            <element signature="e#9684#9688#0" expanded="false" />
+            <element signature="e#9723#9727#0" expanded="false" />
+            <element signature="e#9731#9735#0" expanded="false" />
+            <element signature="e#9770#9774#0" expanded="false" />
+            <element signature="e#9784#9790#0" expanded="false" />
+            <element signature="e#9800#9806#0" expanded="false" />
+            <element signature="e#9806#9810#0" expanded="false" />
+            <element signature="e#9847#9851#0" expanded="false" />
+            <element signature="e#9861#9867#0" expanded="false" />
+            <element signature="e#9874#9880#0" expanded="false" />
+            <element signature="e#9880#9884#0" expanded="false" />
+            <element signature="e#9890#9894#0" expanded="false" />
+            <element signature="e#9900#9904#0" expanded="false" />
+            <element signature="e#9941#9945#0" expanded="false" />
+            <element signature="e#9957#9963#0" expanded="false" />
+            <element signature="e#9975#9981#0" expanded="false" />
+            <element signature="e#9987#9993#0" expanded="false" />
+            <element signature="e#9997#10003#0" expanded="false" />
+            <element signature="e#10003#10007#0" expanded="false" />
+            <element signature="e#10042#10046#0" expanded="false" />
+            <element signature="e#10050#10054#0" expanded="false" />
+            <element signature="e#10089#10093#0" expanded="false" />
+            <element signature="e#10103#10109#0" expanded="false" />
+            <element signature="e#10119#10125#0" expanded="false" />
+            <element signature="e#10125#10129#0" expanded="false" />
+            <element signature="e#10166#10170#0" expanded="false" />
+            <element signature="e#10180#10186#0" expanded="false" />
+            <element signature="e#10193#10199#0" expanded="false" />
+            <element signature="e#10199#10203#0" expanded="false" />
+            <element signature="e#10221#10225#0" expanded="false" />
+            <element signature="e#10231#10235#0" expanded="false" />
+            <element signature="e#10272#10276#0" expanded="false" />
+            <element signature="e#10288#10294#0" expanded="false" />
+            <element signature="e#10306#10312#0" expanded="false" />
+            <element signature="e#10318#10324#0" expanded="false" />
+            <element signature="e#10328#10334#0" expanded="false" />
+            <element signature="e#10334#10338#0" expanded="false" />
+            <element signature="e#10373#10377#0" expanded="false" />
+            <element signature="e#10381#10385#0" expanded="false" />
+            <element signature="e#10420#10424#0" expanded="false" />
+            <element signature="e#10436#10442#0" expanded="false" />
+            <element signature="e#10448#10454#0" expanded="false" />
+            <element signature="e#10461#10467#0" expanded="false" />
+            <element signature="e#10482#10488#0" expanded="false" />
+            <element signature="e#10488#10492#0" expanded="false" />
+            <element signature="e#10492#10496#0" expanded="false" />
+            <element signature="e#10507#10513#0" expanded="false" />
+            <element signature="e#10539#10545#0" expanded="false" />
+            <element signature="e#10558#10564#0" expanded="false" />
+            <element signature="e#10568#10574#0" expanded="false" />
+            <element signature="e#10574#10578#0" expanded="false" />
+            <element signature="e#10578#10582#0" expanded="false" />
+            <element signature="e#10587#10591#0" expanded="false" />
+            <element signature="e#10591#10595#0" expanded="false" />
+            <element signature="e#10602#10606#0" expanded="false" />
+            <element signature="e#10639#10643#0" expanded="false" />
+            <element signature="e#10648#10652#0" expanded="false" />
+            <element signature="e#10681#10685#0" expanded="false" />
+            <element signature="e#10689#10693#0" expanded="false" />
+            <element signature="e#10718#10722#0" expanded="false" />
+            <element signature="e#10726#10730#0" expanded="false" />
+            <element signature="e#10755#10759#0" expanded="false" />
+            <element signature="e#10771#10777#0" expanded="false" />
+            <element signature="e#10783#10789#0" expanded="false" />
+            <element signature="e#10796#10802#0" expanded="false" />
+            <element signature="e#10817#10823#0" expanded="false" />
+            <element signature="e#10823#10827#0" expanded="false" />
+            <element signature="e#10827#10831#0" expanded="false" />
+            <element signature="e#10842#10848#0" expanded="false" />
+            <element signature="e#10874#10880#0" expanded="false" />
+            <element signature="e#10893#10899#0" expanded="false" />
+            <element signature="e#10903#10909#0" expanded="false" />
+            <element signature="e#10909#10913#0" expanded="false" />
+            <element signature="e#10913#10917#0" expanded="false" />
+            <element signature="e#10922#10926#0" expanded="false" />
+            <element signature="e#10926#10930#0" expanded="false" />
+            <element signature="e#10937#10941#0" expanded="false" />
+            <element signature="e#10962#10966#0" expanded="false" />
+            <element signature="e#10970#10974#0" expanded="false" />
+            <element signature="e#10991#10995#0" expanded="false" />
+            <element signature="e#10999#11003#0" expanded="false" />
+            <element signature="e#11016#11020#0" expanded="false" />
+            <element signature="e#11024#11028#0" expanded="false" />
+            <element signature="e#11039#11043#0" expanded="false" />
+            <element signature="e#11047#11051#0" expanded="false" />
+            <element signature="e#11060#11064#0" expanded="false" />
+            <element signature="e#11068#11072#0" expanded="false" />
+            <element signature="e#11074#11078#0" expanded="false" />
+            <element signature="e#11082#11086#0" expanded="false" />
+            <element signature="e#11089#11093#0" expanded="false" />
+            <element signature="e#11105#11111#0" expanded="false" />
+            <element signature="e#11126#11132#0" expanded="false" />
+            <element signature="e#11132#11136#0" expanded="false" />
+            <element signature="e#11139#11143#0" expanded="false" />
+            <element signature="e#11150#11154#0" expanded="false" />
+            <element signature="e#11801#11807#0" expanded="false" />
+            <element signature="e#11813#11819#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/input/json/obesity_corpus_map.json">
+    <entry file="file://$PROJECT_DIR$/code/js/twic.js" />
+    <entry file="file://$PROJECT_DIR$/data/input/json/obesity_meta_info.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="0" column="976" lean-forward="true" selection-start-line="0" selection-start-column="970" selection-end-line="0" selection-end-column="987" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/js/twic.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="330">
+          <caret line="0" column="4533" lean-forward="false" selection-start-line="0" selection-start-column="4533" selection-end-line="0" selection-end-column="4533" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/js/search.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+        <state relative-caret-position="510">
+          <caret line="36" column="57" lean-forward="false" selection-start-line="36" selection-start-column="57" selection-end-line="36" selection-end-column="57" />
           <folding>
             <element signature="e#0#40#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/js/twic_control.js">
+    <entry file="file://$PROJECT_DIR$/tmn_doc.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="675">
+          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/input/json/tmn_corpus_info.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="0" column="2875" lean-forward="false" selection-start-line="0" selection-start-column="2875" selection-end-line="0" selection-end-column="2875" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/input/json/tmn_corpus_map.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="0" column="1718" lean-forward="true" selection-start-line="0" selection-start-column="1718" selection-end-line="0" selection-end-column="1718" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/input/json/twic_corpusmap.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1170">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/js/twic_level.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-322">
-          <caret line="202" column="78" lean-forward="true" selection-start-line="202" selection-start-column="78" selection-end-line="202" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/js/twic_datashape.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="644" column="42" lean-forward="false" selection-start-line="644" selection-start-column="30" selection-end-line="644" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/input/json/obesity_meta_info.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="0" column="4533" lean-forward="false" selection-start-line="0" selection-start-column="4533" selection-end-line="0" selection-end-column="4533" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/js/twic_data.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="39" column="40" lean-forward="true" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/obesity.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="176" column="62" lean-forward="false" selection-start-line="176" selection-start-column="62" selection-end-line="176" selection-end-column="62" />
+        <state relative-caret-position="75">
+          <caret line="77" column="14" lean-forward="true" selection-start-line="77" selection-start-column="14" selection-end-line="77" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/input/json/obesity_corpus_map.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="0" column="56686" lean-forward="false" selection-start-line="0" selection-start-column="56680" selection-end-line="0" selection-end-column="56686" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/input/json/obesity_corpus_info.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="0" column="9124" lean-forward="false" selection-start-line="0" selection-start-column="9124" selection-end-line="0" selection-end-column="9124" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/js/twic_control.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/js/twic_data.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/input/json/obesity_doc_info.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="11" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="11" />
+        <state relative-caret-position="240">
+          <caret line="0" column="3441" lean-forward="false" selection-start-line="0" selection-start-column="3441" selection-end-line="0" selection-end-column="3441" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/js/twic_datashape.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="655" column="13" lean-forward="false" selection-start-line="655" selection-start-column="13" selection-end-line="655" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/js/twic_level.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-86">
+          <caret line="469" column="50" lean-forward="true" selection-start-line="469" selection-start-column="50" selection-end-line="469" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/js/twic_panel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="4635" column="51" lean-forward="false" selection-start-line="4635" selection-start-column="51" selection-end-line="4635" selection-end-column="51" />
+        <state relative-caret-position="560">
+          <caret line="1707" column="81" lean-forward="true" selection-start-line="1707" selection-start-column="81" selection-end-line="1707" selection-end-column="81" />
           <folding />
         </state>
       </provider>
