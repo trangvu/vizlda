@@ -10,6 +10,9 @@ var Searcher = (function(namespace) {
         var cat = selectEle.options[selectEle.selectedIndex].value;
         $("#search-dropdown").removeClass("open");
         var keyword = document.getElementById("keyword").value;
+        if (keyword == "") {
+            keyword = document.getElementById("outer-keywords").value;
+        }
         var data = {}
         data['cat'] = cat;
         data['keyword'] = keyword;
@@ -27,6 +30,16 @@ var Searcher = (function(namespace) {
         var elements = namespace.Store.prototype.s_searchListener;
         for (var i = 0; i < elements.length; i++) {
             elements[i].Update(data,"search");
+        }
+    }
+
+    namespace.toggleSearchForm = function() {
+        element = $("#search-dropdown");
+        if (element.hasClass("open")) {
+            element.removeClass("open");
+        } else {
+            element.addClass("open");
+            document.getElementById("outer-keywords").value = "";
         }
     }
 

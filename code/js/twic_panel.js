@@ -48,7 +48,6 @@ var TWiC = (function(namespace){
     });
 
     namespace.Panel.method("IsPaused", function(){
-
         return this.m_paused;
     });
 
@@ -4001,6 +4000,7 @@ var TWiC = (function(namespace){
         this.m_twicObjects = [];
 
         this.m_numberTopics = 5;
+        this.m_title = "";
     };
     namespace.PublicationView.inherits(namespace.GraphView);
 
@@ -4271,6 +4271,7 @@ var TWiC = (function(namespace){
     namespace.PublicationView.method("QueryDocumentsAndUpdateView", function(p_data){
         this.ClearView();
         this.Load(p_data);
+        this.AddBarText(true);
         this.Render();
 
         // Start with all data shapes highlights
@@ -4307,56 +4308,32 @@ var TWiC = (function(namespace){
                     this.m_controlBar.m_barText.selectAll("*").remove();
 
                     p_controlBar.m_barText.append("tspan")
-                                          .html("TWiC:&nbsp;")
+                                          .html(this.m_title)
                                           .attr("fill", namespace.Level.prototype.s_palette.lightpurple)
                                           .style("font-family", namespace.Level.prototype.s_fontFamily)
                                           .style("font-size", 25);
 
-                    p_controlBar.m_barText.append("tspan")
-                                          .html("\"" + this.m_data.title + "\"")
-                                          .attr("fill", namespace.Level.prototype.s_palette.gold)
-                                          .style("font-family", namespace.Level.prototype.s_fontFamily)
-                                          .style("font-size", 23);
-
-                    /*p_controlBar.m_barText.append("tspan")
-                                          .html("&nbsp;from&nbsp;")
-                                          .attr("fill", namespace.Level.prototype.s_palette.gold)
-                                          .style("font-family", namespace.Level.prototype.s_fontFamily)
-                                          .style("font-size", 21);
-
-                    p_controlBar.m_barText.append("tspan")
-                                          .html("Topic Cluster " + this.m_data.clusterIndex)
-                                          .attr("fill", this.m_level.m_topicColors[this.m_data.clusterIndex])
-                                          .style("font-family", namespace.Level.prototype.s_fontFamily)
-                                          .style("font-size", 21);
-
-                    p_controlBar.m_barText.append("tspan")
-                                          .html("&nbsp;in&nbsp;")
-                                          .attr("fill", namespace.Level.prototype.s_palette.gold)
-                                          .style("font-family", namespace.Level.prototype.s_fontFamily)
-                                          .style("font-size", 21);
-
-                    p_controlBar.m_barText.append("tspan")
-                                          .html(this.m_level.m_corpusMap["name"])
-                                          .attr("fill", namespace.Level.prototype.s_palette.lightblue)
-                                          .style("font-family", namespace.Level.prototype.s_fontFamily)
-                                          .style("font-size", 21);*/
+                    // p_controlBar.m_barText.append("tspan")
+                    //                       .html("\"" + this.m_level.m_corpusInfo.name + "\"")
+                    //                       .attr("fill", namespace.Level.prototype.s_palette.gold)
+                    //                       .style("font-family", namespace.Level.prototype.s_fontFamily)
+                    //                       .style("font-size", 23);
                 }
             } else {
 
                 this.m_controlBar.m_barText.selectAll("*").remove();
 
                 p_controlBar.m_barText.append("tspan")
-                                      .html("TWiC:&nbsp;")
+                                      .html(this.m_title)
                                       .attr("fill", namespace.Level.prototype.s_palette.lightpurple)
                                       .style("font-family", namespace.Level.prototype.s_fontFamily)
                                       .style("font-size", 25);
 
-                p_controlBar.m_barText.append("tspan")
-                                      .html("Publication View")
-                                      .attr("fill", namespace.Level.prototype.s_palette.gold)
-                                      .style("font-family", namespace.Level.prototype.s_fontFamily)
-                                      .style("font-size", 25);
+                // p_controlBar.m_barText.append("tspan")
+                //                       .html("Publication View")
+                //                       .attr("fill", namespace.Level.prototype.s_palette.gold)
+                //                       .style("font-family", namespace.Level.prototype.s_fontFamily)
+                //                       .style("font-size", 25);
             }
         }.bind(this));
     });
@@ -4477,22 +4454,54 @@ var TWiC = (function(namespace){
         });
     });
 
-    namespace.PublicationView.method("Load", function(p_options){
+    namespace.PublicationView.method("FilterDocs", function(p_options) {
         var keys = null;
         var data = this.m_level.m_docInfo.docs;
         var cnt = data.length < 20 ? data.length : 20;
-        if (p_options == undefined || p_options['cat'] == 0) {
-            keys = Object.keys(data).slice(0, cnt);
-        } else {
-            var cat = this.m_level.m_categories[p_options['cat']-1];
-            keys = this.m_level.m_docInfo.tag_index[cat];
+        if (p_options == undefined || (p_options['cat'] ==0 && p_options['keyword'] == "")) {
+            keys = Object.keys(data);
             if (keys.length > cnt) {
                 keys = keys.slice(0,cnt);
             }
+            this.m_title = this.m_level.m_corpusInfo.name + " Corpus";
+            return keys;
         }
+        this.m_title = " results for "
+        if (p_options['cat'] == 0) {
+            keys = Object.keys(data);
+            this.m_title += " all categories";
+        } else {
+            var cat = this.m_level.m_categories[p_options['cat']-1];
+            this.m_title += cat + " category";
+            keys = this.m_level.m_docInfo.tag_index[cat];
+        }
+
+        if (p_options['keyword'] != undefined && p_options['keyword'] != "") {
+            this.m_title += " and " + p_options['keyword'] + " keywords";
+            var tokens = p_options['keyword'].split(" ");
+            for (var i = 0; i < tokens.length; i++) {
+                if (this.m_level.m_docInfo.word_index[tokens[i]] == undefined) {
+                    this.m_title = "0" + this.m_title;
+                    return [];
+                } else {
+                    keys = this.m_level.m_docInfo.word_index[tokens[i]].filter((n) => keys.includes(n));
+                }
+            }
+        }
+        this.m_title = keys.length + this.m_title;
+        if (keys.length > cnt) {
+            keys = keys.slice(0,cnt);
+        }
+        return keys;
+    });
+
+    namespace.PublicationView.method("Load", function(p_options){
+        var keys = this.FilterDocs(p_options);
+
         this.m_objectsJSON = [];
         this.m_twicObjects = [];
 
+        var data = this.m_level.m_docInfo.docs;
 
         for (var index = 0; index < keys.length; index++) {
             //Find top topic of current document

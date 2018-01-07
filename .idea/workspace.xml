@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0fcd6610-bcc0-4c64-b325-fe2b06024747" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/js/twic_data.js" afterPath="$PROJECT_DIR$/code/js/twic_data.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/js/twic_datashape.js" afterPath="$PROJECT_DIR$/code/js/twic_datashape.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/js/twic_level.js" afterPath="$PROJECT_DIR$/code/js/twic_level.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/js/search.js" afterPath="$PROJECT_DIR$/code/js/search.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/js/twic_panel.js" afterPath="$PROJECT_DIR$/code/js/twic_panel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/input/json/obesity_corpus_info.json" afterPath="$PROJECT_DIR$/data/input/json/obesity_corpus_info.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/input/json/obesity_doc_info.json" afterPath="$PROJECT_DIR$/data/input/json/obesity_doc_info.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/obesity.html" afterPath="$PROJECT_DIR$/obesity.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -35,8 +33,8 @@
       <file leaf-file-name="obesity.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/obesity.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="77" column="14" lean-forward="true" selection-start-line="77" selection-start-column="14" selection-end-line="77" selection-end-column="14" />
+            <state relative-caret-position="210">
+              <caret line="47" column="70" lean-forward="false" selection-start-line="47" selection-start-column="56" selection-end-line="47" selection-end-column="70" />
               <folding />
             </state>
           </provider>
@@ -45,18 +43,18 @@
       <file leaf-file-name="twic_data.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/js/twic_data.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+            <state relative-caret-position="595">
+              <caret line="48" column="72" lean-forward="false" selection-start-line="48" selection-start-column="72" selection-end-line="48" selection-end-column="72" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="twic_panel.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="twic_panel.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/js/twic_panel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="1707" column="81" lean-forward="true" selection-start-line="1707" selection-start-column="81" selection-end-line="1707" selection-end-column="81" />
+            <state relative-caret-position="953">
+              <caret line="4471" column="27" lean-forward="false" selection-start-line="4471" selection-start-column="27" selection-end-line="4471" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -65,18 +63,8 @@
       <file leaf-file-name="twic_control.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/js/twic_control.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="obesity_doc_info.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/input/json/obesity_doc_info.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="0" column="3441" lean-forward="false" selection-start-line="0" selection-start-column="3441" selection-end-line="0" selection-end-column="3441" />
+            <state relative-caret-position="270">
+              <caret line="18" column="60" lean-forward="false" selection-start-line="18" selection-start-column="60" selection-end-line="18" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -85,8 +73,8 @@
       <file leaf-file-name="twic_datashape.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/js/twic_datashape.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="655" column="13" lean-forward="false" selection-start-line="655" selection-start-column="13" selection-end-line="655" selection-end-column="13" />
+            <state relative-caret-position="305">
+              <caret line="344" column="59" lean-forward="true" selection-start-line="344" selection-start-column="59" selection-end-line="344" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -122,6 +110,18 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="search.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/code/js/search.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="38" column="40" lean-forward="true" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#40#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="tmn_doc.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tmn_doc.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -145,9 +145,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>defaultFont</find>
-      <find>PublicationView.method(&quot;Load&quot;</find>
-      <find>TWiC</find>
       <find>TWiC = new</find>
       <find>Interaction</find>
       <find>.Update</find>
@@ -175,6 +172,9 @@
       <find>s_datashapeTextClassName</find>
       <find>m_textTag</find>
       <find>DarkenAllDataShapes</find>
+      <find>isPause</find>
+      <find>IsPaused</find>
+      <find>AddBarText</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -194,14 +194,14 @@
         <option value="$PROJECT_DIR$/tmn-topics.html" />
         <option value="$PROJECT_DIR$/data/input/json/obesity_meta_info.json" />
         <option value="$PROJECT_DIR$/code/js/twic_search.js" />
-        <option value="$PROJECT_DIR$/code/js/search.js" />
         <option value="$PROJECT_DIR$/data/input/json/obesity_doc_info.json" />
-        <option value="$PROJECT_DIR$/obesity.html" />
         <option value="$PROJECT_DIR$/code/js/twic_data.js" />
         <option value="$PROJECT_DIR$/data/input/json/obesity_corpus_info.json" />
         <option value="$PROJECT_DIR$/code/js/twic_level.js" />
         <option value="$PROJECT_DIR$/code/js/twic_datashape.js" />
         <option value="$PROJECT_DIR$/code/js/twic_panel.js" />
+        <option value="$PROJECT_DIR$/obesity.html" />
+        <option value="$PROJECT_DIR$/code/js/search.js" />
       </list>
     </option>
   </component>
@@ -427,6 +427,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="0fcd6610-bcc0-4c64-b325-fe2b06024747" name="Default" comment="" />
@@ -441,12 +444,12 @@
       <workItem from="1514863658767" duration="1190000" />
       <workItem from="1514941141838" duration="7635000" />
       <workItem from="1515193162279" duration="41462000" />
-      <workItem from="1515314592824" duration="13038000" />
+      <workItem from="1515314592824" duration="17872000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110626000" />
+    <option name="totallyTimeSpent" value="115460000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1020" extended-state="7" />
@@ -455,7 +458,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1711569" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48549107" sideWeight="0.50416666" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31990793" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.53394705" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -974,16 +977,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/js/search.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="36" column="57" lean-forward="false" selection-start-line="36" selection-start-column="57" selection-end-line="36" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tmn_doc.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
@@ -1016,58 +1009,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/obesity.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="77" column="14" lean-forward="true" selection-start-line="77" selection-start-column="14" selection-end-line="77" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/input/json/obesity_corpus_map.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="466">
           <caret line="0" column="56686" lean-forward="false" selection-start-line="0" selection-start-column="56680" selection-end-line="0" selection-end-column="56686" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/input/json/obesity_corpus_info.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="0" column="9124" lean-forward="false" selection-start-line="0" selection-start-column="9124" selection-end-line="0" selection-end-column="9124" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/js/twic_control.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/js/twic_data.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/input/json/obesity_doc_info.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="0" column="3441" lean-forward="false" selection-start-line="0" selection-start-column="3441" selection-end-line="0" selection-end-column="3441" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/js/twic_datashape.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="655" column="13" lean-forward="false" selection-start-line="655" selection-start-column="13" selection-end-line="655" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1080,11 +1025,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/code/js/twic_datashape.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="344" column="59" lean-forward="true" selection-start-line="344" selection-start-column="59" selection-end-line="344" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/input/json/obesity_doc_info.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="0" column="7796" lean-forward="false" selection-start-line="0" selection-start-column="7792" selection-end-line="0" selection-end-column="7799" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/js/twic_control.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="60" lean-forward="false" selection-start-line="18" selection-start-column="60" selection-end-line="18" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/input/json/obesity_corpus_info.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="0" column="9124" lean-forward="false" selection-start-line="0" selection-start-column="9124" selection-end-line="0" selection-end-column="9124" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/js/twic_data.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="48" column="72" lean-forward="false" selection-start-line="48" selection-start-column="72" selection-end-line="48" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/code/js/twic_panel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="1707" column="81" lean-forward="true" selection-start-line="1707" selection-start-column="81" selection-end-line="1707" selection-end-column="81" />
+        <state relative-caret-position="953">
+          <caret line="4471" column="27" lean-forward="false" selection-start-line="4471" selection-start-column="27" selection-end-line="4471" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/obesity.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="47" column="70" lean-forward="false" selection-start-line="47" selection-start-column="56" selection-end-line="47" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/js/search.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="38" column="40" lean-forward="true" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#40#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
